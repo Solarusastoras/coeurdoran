@@ -1,32 +1,41 @@
-const getApiHost = () => {
-  const currentHost = typeof window !== 'undefined' ? window.location.hostname : '';
-  if (currentHost && currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
-    return currentHost;
-  }
-  return '192.168.1.98';
-};
-
-const API_BASE_URL = `http://${getApiHost()}:5001/api`;
+// IP locale du NAS (réseau maison)
+const NAS_LOCAL_IP = '192.168.1.98';
+// IP publique du NAS (accès depuis internet / Vercel)
+const NAS_PUBLIC_IP = '80.9.84.84';
+const NAS_PORT = 5001;
 
 /**
- * Construit l'URL complète pour accéder aux images hébergées sur le serveur local (NAS).
+ * Détermine si l'utilisateur est sur le réseau local (maison).
+ */
+const isLocalNetwork = () => {
+  if (typeof window === 'undefined') return false;
+  const hostname = window.location.hostname;
+  return (
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname.startsWith('192.168.')
+  );
+};
+
+/**
+ * Retourne l'hôte NAS approprié selon le contexte (local ou public).
+ */
+const getNasHost = () => {
+  return isLocalNetwork() ? NAS_LOCAL_IP : NAS_PUBLIC_IP;
+};
+
+const API_BASE_URL = `http://${getNasHost()}:${NAS_PORT}/api`;
+
+/**
+ * Construit l'URL complète pour accéder aux images hébergées sur le NAS.
+ * Fonctionne depuis le réseau local ET depuis Vercel (internet).
  */
 export function getImageUrl(imagePath) {
   if (!imagePath) return null;
   if (imagePath.startsWith('http')) return imagePath;
-  
-  // Détecter si on accède localement (NAS) ou via le site public (OVH)
-  const isLocal = typeof window !== 'undefined' && (
-    window.location.hostname === 'localhost' || 
-    window.location.hostname === '127.0.0.1' || 
-    window.location.hostname.startsWith('192.168.')
-  );
-  
-  if (!isLocal) {
-    return imagePath; // Chargement relatif depuis OVH
-  }
-  
-  return `http://${getApiHost()}:5001${imagePath}`;
+
+  const nasHost = isLocalNetwork() ? NAS_LOCAL_IP : NAS_PUBLIC_IP;
+  return `http://${nasHost}:${NAS_PORT}${imagePath}`;
 }
 
 /**
