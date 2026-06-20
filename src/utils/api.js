@@ -1,7 +1,5 @@
 // IP locale du NAS (réseau maison)
 const NAS_LOCAL_IP = '192.168.1.98';
-// IP publique du NAS (accès depuis internet / Vercel)
-const NAS_PUBLIC_IP = '80.9.84.84';
 const NAS_PORT = 5001;
 
 /**
@@ -18,28 +16,33 @@ const isLocalNetwork = () => {
 };
 
 /**
- * Retourne l'hôte NAS approprié selon le contexte (local ou public).
+ * URL de base de l'API.
+ * - Local (maison) : accès direct au NAS
+ * - Public (Vercel) : passe par les fonctions proxy Vercel (HTTPS)
  */
-const getNasHost = () => {
-  return isLocalNetwork() ? NAS_LOCAL_IP : NAS_PUBLIC_IP;
-};
-
-const API_BASE_URL = `http://${getNasHost()}:${NAS_PORT}/api`;
+const API_BASE_URL = isLocalNetwork()
+  ? `http://${NAS_LOCAL_IP}:${NAS_PORT}/api`
+  : '/api';
 
 /**
- * Construit l'URL complète pour accéder aux images hébergées sur le NAS.
- * Fonctionne depuis le réseau local ET depuis Vercel (internet).
+ * Construit l'URL pour afficher une image.
+ * - Local : accès direct au NAS
+ * - Vercel : via le proxy /api/image (évite Mixed Content HTTP/HTTPS)
  */
 export function getImageUrl(imagePath) {
   if (!imagePath) return null;
   if (imagePath.startsWith('http')) return imagePath;
 
-  const nasHost = isLocalNetwork() ? NAS_LOCAL_IP : NAS_PUBLIC_IP;
-  return `http://${nasHost}:${NAS_PORT}${imagePath}`;
+  if (isLocalNetwork()) {
+    return `http://${NAS_LOCAL_IP}:${NAS_PORT}${imagePath}`;
+  }
+
+  // Proxy Vercel : transforme HTTP NAS → HTTPS Vercel
+  return `/api/image?path=${encodeURIComponent(imagePath)}`;
 }
 
 /**
- * Récupère tous les articles du menu depuis le serveur local.
+ * Récupère tous les articles du menu.
  */
 export async function getMenu() {
   const response = await fetch(`${API_BASE_URL}/menu`);
@@ -51,14 +54,11 @@ export async function getMenu() {
 
 /**
  * Crée un nouvel article de menu.
- * @param {Object} item - Les données de l'article (nom, prix, description, etc.).
  */
 export async function createMenuItem(item) {
   const response = await fetch(`${API_BASE_URL}/menu`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
   });
   if (!response.ok) {
@@ -69,15 +69,11 @@ export async function createMenuItem(item) {
 
 /**
  * Modifie un article de menu existant.
- * @param {string} id - L'identifiant de l'article.
- * @param {Object} item - Les données mises à jour de l'article.
  */
 export async function updateMenuItem(id, item) {
   const response = await fetch(`${API_BASE_URL}/menu/${id}`, {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
   });
   if (!response.ok) {
@@ -88,7 +84,6 @@ export async function updateMenuItem(id, item) {
 
 /**
  * Supprime un article de menu.
- * @param {string} id - L'identifiant de l'article à supprimer.
  */
 export async function deleteMenuItem(id) {
   const response = await fetch(`${API_BASE_URL}/menu/${id}`, {
@@ -101,15 +96,19 @@ export async function deleteMenuItem(id) {
 }
 
 /**
- * Importe un fichier image vers le serveur.
- * @param {File} file - Le fichier image sélectionné.
- * @returns {Promise<{ imageUrl: string }>} L'URL de l'image stockée en local.
+ * Upload une photo vers le NAS.
+ * - Local : envoi direct au NAS
+ * - Vercel : via le proxy /api/upload
  */
 export async function uploadImage(file) {
   const formData = new FormData();
   formData.append('image', file);
 
-  const response = await fetch(`${API_BASE_URL}/upload`, {
+  const uploadUrl = isLocalNetwork()
+    ? `http://${NAS_LOCAL_IP}:${NAS_PORT}/api/upload`
+    : '/api/upload';
+
+  const response = await fetch(uploadUrl, {
     method: 'POST',
     body: formData,
   });
