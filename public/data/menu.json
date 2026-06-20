@@ -1,0 +1,121 @@
+[
+  {
+    "id": "1",
+    "name": "Boureks Croustillants à la Viande Hachée",
+    "description": "Fines feuilles de brick croustillantes farcies à la viande hachée assaisonnée, œufs, persil et épices traditionnelles.",
+    "price": 8.5,
+    "category": "entree",
+    "image": "/uploads/bourek.jpg",
+    "tags": [
+      "Spécialité",
+      "Chaud"
+    ],
+    "allergens": [
+      "Gluten",
+      "Œufs"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Chorba Frik Traditionnelle à l'Agneau",
+    "description": "Soupe traditionnelle algérienne parfumée au blé concassé (frik), viande d'agneau fondante, légumes mijotés, menthe et coriandre fraîche.",
+    "price": 9.5,
+    "category": "entree",
+    "image": "/uploads/chorba.jpg",
+    "tags": [
+      "Traditionnel",
+      "Chaud"
+    ],
+    "allergens": [
+      "Gluten"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Couscous Royal \"Coeur d'Oran\"",
+    "description": "Semoule de blé fine cuite à la vapeur, accompagnée de légumes fondants dans un bouillon parfumé, brochettes d'agneau grillées, poulet fermier rôti et merguez maison.",
+    "price": 26,
+    "category": "plat",
+    "image": "/uploads/couscous.jpg",
+    "tags": [
+      "Chef's Special",
+      "Copieux"
+    ],
+    "allergens": [
+      "Gluten"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Tajine d'Agneau aux Pruneaux et Amandes",
+    "description": "Mijoté d'agneau ultra-fondant parfumé à la cannelle et à l'eau de fleur d'oranger, décoré de pruneaux caramélisés et parsemé d'amandes effilées grillées.",
+    "price": 24.5,
+    "category": "plat",
+    "image": "/uploads/tajine.jpg",
+    "tags": [
+      "Sucré-Salé",
+      "Incontournable"
+    ],
+    "allergens": [
+      "Fruits à coque"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Assortiment de Pâtisseries Fines Maison",
+    "description": "Sélection de douceurs orientales cuisinées au miel pur d'oranger et amandes fraîches (Baklawa, Makrout, Corne de gazelle).",
+    "price": 10.5,
+    "category": "desert",
+    "image": "/uploads/patisseries.jpg",
+    "tags": [
+      "Fait Maison",
+      "Sucré"
+    ],
+    "allergens": [
+      "Gluten",
+      "Fruits à coque",
+      "Sésame"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Salade d'Oranges à la Fleur d'Oranger et Cannelle",
+    "description": "Fines tranches d'oranges juteuses marinées dans un sirop léger à l'eau de fleur d'oranger, saupoudrées de cannelle et décorées de menthe fraîche.",
+    "price": 8,
+    "category": "desert",
+    "image": "/uploads/salade_oranges.jpg",
+    "tags": [
+      "Frais",
+      "Léger",
+      "Sans Gluten"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "7",
+    "name": "Thé à la Menthe Traditionnel",
+    "description": "Thé vert de qualité infusé aux feuilles de menthe fraîche et sucré, servi selon la tradition d'Oran en hauteur pour libérer tous les arômes. Théière de 3 verres.",
+    "price": 6,
+    "category": "boisson",
+    "image": "/uploads/the_menthe.jpg",
+    "tags": [
+      "Chaud",
+      "Maison"
+    ],
+    "allergens": []
+  },
+  {
+    "id": "8",
+    "name": "Cherbet (Citronnade Algérienne à la Fleur d'Oranger)",
+    "description": "Limonade traditionnelle rafraîchissante pressée aux citrons jaunes bio de saison et subtilement parfumée à l'eau de fleur d'oranger.",
+    "price": 5,
+    "category": "boisson",
+    "image": "/uploads/cherbet.jpg",
+    "tags": [
+      "Frais",
+      "Sans Alcool",
+      "Maison"
+    ],
+    "allergens": []
+  }
+]

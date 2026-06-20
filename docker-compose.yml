@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  traiteur-api:
+    image: node:20-alpine
+    container_name: traiteur-api
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5001:5001"
+    command: sh -c "npm install --only=production && node server.js"
+    restart: always
