@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Printer, Eye, Settings, FileText, CheckSquare, Square } from 'lucide-react';
+import './MenuBooklet.scss';
 
 // Helper pour souligner le O dans les textes dynamiques contenant "Oran"
 const renderTextWithUnderlineO = (text) => {
@@ -8,7 +9,7 @@ const renderTextWithUnderlineO = (text) => {
   const parts = text.split(regex);
   return parts.map((part, i) => {
     if (part.toLowerCase() === 'oran') {
-      const firstLetter = part[0];
+      const firstLetter = part[0].toLowerCase();
       const rest = part.slice(1);
       return (
         <span key={i}>
@@ -213,7 +214,7 @@ export default function MenuBooklet({ menuItems }) {
             <div className="booklet-page cover-page">
               <div className="cover-border">
                 <div className="cover-header">
-                  <img src="/logo192.png" alt="Logo Cœur d’Oran" className="cover-logo" />
+                  <img src="/logo.svg" alt="Logo Cœur d’Oran" className="cover-logo" />
                   <span className="cover-brand">{renderTextWithUnderlineO("Cœur d’Oran")}</span>
                   <span className="cover-location">Bordeaux • Gironde</span>
                 </div>

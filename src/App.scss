@@ -1,0 +1,326 @@
+/* ==========================================
+   CHARTE GRAPHIQUE - COEUR D'ORAN
+   Thème : Algérie (Vert Émeraude & Rouge Cerise)
+   ========================================== */
+
+:root {
+  /* Typographie */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Palette HSL Premium - Thème Personnalisé */
+  --color-bordeaux: hsl(65, 35%, 44%);
+  /* Dominant color: Olive green #8F9648 */
+  --color-bordeaux-light: hsl(65, 35%, 52%);
+  --color-bordeaux-ultra-light: hsl(65, 35%, 96%);
+
+  --color-gold: hsl(21, 51%, 40%);
+  /* Secondary color: Terracotta #9B5833 */
+  --color-gold-light: hsl(21, 51%, 85%);
+  --color-gold-dark: hsl(21, 51%, 30%);
+
+  --color-red: hsl(33, 92%, 54%);
+  /* Accent color: Orange #F6931C */
+  --color-red-light: hsl(33, 92%, 92%);
+  --color-red-dark: hsl(33, 92%, 40%);
+
+  --color-cream: hsl(26, 93%, 88%);
+  /* Body background: Peach #FDDDC4 */
+  --color-slate-dark: hsl(215, 25%, 12%);
+  --color-slate-light: hsl(215, 12%, 45%);
+  --color-border: hsl(26, 30%, 82%);
+  --color-success: hsl(142, 60%, 40%);
+  --color-success-bg: hsl(142, 60%, 96%);
+  --color-error: hsl(355, 78%, 46%);
+  /* Coordonné avec le rouge accent */
+  --color-error-bg: hsl(355, 78%, 96%);
+
+  /* Spacings & Borders */
+  --border-radius-lg: 16px;
+  --border-radius-md: 10px;
+  --border-radius-sm: 6px;
+  --shadow-soft: 0 10px 30px -10px rgba(10, 50, 30, 0.08);
+  --shadow-heavy: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-cream);
+  /* Subtle geometric Algerian-inspired tiling motif overlaid on ambient glow layers */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M60 0 L60 120 M0 60 L120 60' stroke='rgba(155, 88, 51, 0.02)' stroke-width='1'/%3E%3Cpath d='M0 0 L120 120 M120 0 L0 120' stroke='rgba(155, 88, 51, 0.01)' stroke-width='0.5'/%3E%3Cpath d='M60 0 L120 60 L60 120 L0 60 Z' fill='none' stroke='rgba(155, 88, 51, 0.03)' stroke-width='1'/%3E%3Crect x='35' y='35' width='50' height='50' fill='none' stroke='rgba(155, 88, 51, 0.04)' stroke-width='1' transform='rotate(0 60 60)'/%3E%3Crect x='35' y='35' width='50' height='50' fill='none' stroke='rgba(155, 88, 51, 0.04)' stroke-width='1' transform='rotate(45 60 60)'/%3E%3Ccircle cx='60' cy='60' r='35' fill='none' stroke='rgba(143, 150, 72, 0.03)' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='15' fill='none' stroke='rgba(155, 88, 51, 0.05)' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='5' fill='rgba(155, 88, 51, 0.03)'/%3E%3Ccircle cx='0' cy='0' r='20' fill='none' stroke='rgba(143, 150, 72, 0.03)' stroke-width='1'/%3E%3Ccircle cx='120' cy='0' r='20' fill='none' stroke='rgba(143, 150, 72, 0.03)' stroke-width='1'/%3E%3Ccircle cx='0' cy='120' r='20' fill='none' stroke='rgba(143, 150, 72, 0.03)' stroke-width='1'/%3E%3Ccircle cx='120' cy='120' r='20' fill='none' stroke='rgba(143, 150, 72, 0.03)' stroke-width='1'/%3E%3Crect x='-10' y='-10' width='20' height='20' fill='none' stroke='rgba(155, 88, 51, 0.02)' stroke-width='1' transform='rotate(45 0 0)'/%3E%3Crect x='110' y='-10' width='20' height='20' fill='none' stroke='rgba(155, 88, 51, 0.02)' stroke-width='1' transform='rotate(45 120 0)'/%3E%3Crect x='-10' y='110' width='20' height='20' fill='none' stroke='rgba(155, 88, 51, 0.02)' stroke-width='1' transform='rotate(45 0 120)'/%3E%3Crect x='110' y='110' width='20' height='20' fill='none' stroke='rgba(155, 88, 51, 0.02)' stroke-width='1' transform='rotate(45 120 120)'/%3E%3C/svg%3E"),
+    radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.75) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(155, 88, 51, 0.08) 0px, transparent 40%),
+    radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.4) 0px, transparent 60%),
+    radial-gradient(at 0% 100%, rgba(143, 150, 72, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(246, 147, 28, 0.05) 0px, transparent 40%);
+  background-attachment: scroll, fixed, fixed, fixed, fixed, fixed;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  color: var(--color-slate-dark);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-serif {
+  font-family: var(--font-serif);
+  font-weight: bold;
+}
+
+/* Layout */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding-bottom: 4rem;
+}
+
+/* Conteneur principal limité en largeur */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Boutons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border: none;
+  font-family: var(--font-sans);
+}
+
+.btn-primary {
+  background-color: var(--color-bordeaux);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-bordeaux-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px rgba(88, 24, 31, 0.3);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--color-bordeaux);
+  color: var(--color-bordeaux);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-bordeaux);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+
+  /* Container */
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Boutons */
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.65rem 1.1rem;
+  }
+}
+
+/* ==========================================
+     MEDIA PRINT - GESTION DES FASCICULES PDF
+     ========================================== */
+
+@media print {
+
+  /* Masquage de tous les composants web interactifs */
+  body,
+  html {
+    background-color: white !important;
+    color: black !important;
+    font-size: 11pt !important;
+    width: 210mm;
+    height: 297mm;
+    /* Taille A4 */
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Cacher l'entête du site, le footer, la config et l'administration */
+  .header,
+  .footer,
+  .no-print,
+  .booklet-config-panel,
+  .preview-watermark,
+  .admin-section,
+  .hero,
+  .catalog-section,
+  .admin-lock-screen {
+    display: none !important;
+  }
+
+  .app-container,
+  .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  /* Formatage du papier de l'aperçu pour impression réelle */
+  .booklet-preview-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .booklet-paper {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 15mm 20mm !important;
+    /* Marges d'impression standards */
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .booklet-page {
+    page-break-inside: avoid !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 260mm !important;
+    /* Presque toute la hauteur de page */
+    justify-content: space-between !important;
+  }
+
+  .cover-page {
+    justify-content: center !important;
+    align-items: center !important;
+    height: 260mm !important;
+  }
+
+  .cover-border {
+    border: 3px double var(--color-gold) !important;
+    padding: 40mm 15mm !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Forcer le saut de page matériel */
+  .print-page-break {
+    display: block !important;
+    page-break-before: always !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .print-page-break::after {
+    display: none !important;
+  }
+
+  /* Typographie d'impression */
+  .cover-title {
+    font-size: 36pt !important;
+    color: var(--color-bordeaux) !important;
+  }
+
+  .cover-brand {
+    font-size: 24pt !important;
+    color: var(--color-bordeaux) !important;
+  }
+
+  .print-category-title {
+    font-size: 14pt !important;
+    color: var(--color-bordeaux) !important;
+  }
+
+  .print-item-name,
+  .print-item-price {
+    font-size: 11pt !important;
+    color: black !important;
+  }
+
+  .print-item-desc {
+    font-size: 9.5pt !important;
+    color: #444 !important;
+  }
+
+  /* Dotted line force black print */
+  .print-item-dots {
+    border-bottom: 1px dotted #333 !important;
+  }
+}
+
+/* Lettre O soulignée comme le logo officiel */
+.underlined-o {
+  position: relative;
+  display: inline-block;
+  font-size: 0.72em;
+  vertical-align: 0.22em;
+  line-height: 1;
+  margin: 0 0.04em;
+}
+
+/* Horizontal line under the letter, aligned with the baseline of 'ran' */
+.underlined-o::before {
+  content: '';
+  position: absolute;
+  bottom: -0.24em;
+  left: -5%;
+  width: 110%;
+  height: 0.09em;
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+/* Diamond dot under the horizontal line */
+.underlined-o::after {
+  content: '';
+  position: absolute;
+  bottom: -0.48em;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 0.16em;
+  height: 0.16em;
+  background-color: currentColor;
+}

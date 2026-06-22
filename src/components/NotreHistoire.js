@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './NotreHistoire.scss';
 
 const services = [
   {
@@ -49,7 +50,6 @@ export default function NotreHistoire({ setActiveTab }) {
             />
             {/* Badge flottant */}
             <div className="nh-cq-badge">
-              <span>🇩🇿</span>
               <span>Oranaise · Bordeaux</span>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function NotreHistoire({ setActiveTab }) {
             </div>
             <p className="nh-team-name">Djaouida</p>
             <p className="nh-team-role">Créatrice &amp; Fondatrice</p>
-            <p className="nh-team-origin">Oranaise 🇩🇿</p>
+            <p className="nh-team-origin">Oranaise</p>
           </div>
         </div>
 

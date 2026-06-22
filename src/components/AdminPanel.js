@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Plus, Edit2, Trash2, Check, Lock, Unlock, Upload, AlertTriangle, Eye } from 'lucide-react';
 import { createMenuItem, updateMenuItem, deleteMenuItem, uploadImage, getImageUrl } from '../utils/api';
+import './AdminPanel.scss';
 
-export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin, setActiveTab }) {
+export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }) {
+  const navigate = useNavigate();
   // Sécurité d'accès
   const [pinCode, setPinCode] = useState('');
   const [pinError, setPinError] = useState('');
@@ -218,7 +221,7 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin, 
           <h2 className="section-title">Gestion de la Carte Traiteur</h2>
           <p className="section-subtitle">Interface d'administration synchronisée en direct avec votre stockage NAS.</p>
         </div>
-        <button className="btn btn-outline" onClick={() => { setIsAdmin(false); setActiveTab('client'); }}>
+        <button className="btn btn-outline" onClick={() => { setIsAdmin(false); navigate('/'); }}>
           <Lock size={16} />
           Verrouiller la session
         </button>

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Star, Heart, Utensils, Wine, Users, Flame } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Star, Utensils, Wine, Flame, ArrowRight, ChefHat, Coffee } from 'lucide-react';
+import './Hero.scss';
 
 export default function Hero({ onExplore }) {
   return (
@@ -12,7 +14,7 @@ export default function Hero({ onExplore }) {
         </div>
 
         <h1 className="hero-title">
-          Traiteur Cœur d’<span className="underlined-o">O</span>ran
+          Traiteur Cœur d’<span className="underlined-o">o</span>ran
         </h1>
 
         <p className="hero-tagline" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
@@ -31,35 +33,75 @@ export default function Hero({ onExplore }) {
         </div>
 
         <div className="hero-features">
-          <div className="feature-card">
-            <Heart className="feature-icon" size={24} />
-            <h3>Mariages</h3>
-            <p>Organisation de buffets et repas de noces traditionnels pour sublimer votre plus beau jour.</p>
-          </div>
-
-          <div className="feature-card">
-            <Utensils className="feature-icon" size={24} />
+          <Link to="/repas-assis" className="feature-card">
+            <div className="feature-icon-wrapper">
+              <Utensils className="feature-icon" size={24} />
+            </div>
+            <h3>Repas Assis</h3>
+            <p>L'excellence d'un repas traditionnel servi à table pour toutes vos réceptions.</p>
+            <div className="feature-card-footer">
+              <span className="feature-discover">
+                Découvrir <ArrowRight size={14} className="discover-arrow" />
+              </span>
+              <span className="feature-price">À partir de<br />16€ / pers.</span>
+            </div>
+          </Link>
+ 
+          <Link to="/buffet" className="feature-card">
+            <div className="feature-icon-wrapper">
+              <ChefHat className="feature-icon" size={24} />
+            </div>
             <h3>Buffets</h3>
             <p>Buffets d'exception alliant présentation soignée, saveurs orientales et convivialité.</p>
-          </div>
-
-          <div className="feature-card">
-            <Wine className="feature-icon" size={24} />
+            <div className="feature-card-footer">
+              <span className="feature-discover">
+                Découvrir <ArrowRight size={14} className="discover-arrow" />
+              </span>
+              <span className="feature-price">À partir de<br />15€ / pers.</span>
+            </div>
+          </Link>
+ 
+          <Link to="/cocktail" className="feature-card">
+            <div className="feature-icon-wrapper">
+              <Wine className="feature-icon" size={24} />
+            </div>
             <h3>Cocktails</h3>
             <p>Cocktails dînatoires et pièces salées/sucrées raffinées pour toutes vos réceptions.</p>
-          </div>
-
-          <div className="feature-card">
-            <Users className="feature-icon" size={24} />
-            <h3>Repas de Groupe</h3>
-            <p>Banquets, séminaires professionnels et événements familiaux chaleureux sur mesure.</p>
-          </div>
-
-          <div className="feature-card">
-            <Flame className="feature-icon" size={24} />
+            <div className="feature-card-footer">
+              <span className="feature-discover">
+                Découvrir <ArrowRight size={14} className="discover-arrow" />
+              </span>
+              <span className="feature-price">À partir de<br />7€ / pers.</span>
+            </div>
+          </Link>
+ 
+          <Link to="/brunch" className="feature-card">
+            <div className="feature-icon-wrapper">
+              <Coffee className="feature-icon" size={24} />
+            </div>
+            <h3>Matinées & Brunchs</h3>
+            <p>Des formules matinales douces, épicées et conviviales pour vos lendemains de fêtes ou réunions.</p>
+            <div className="feature-card-footer">
+              <span className="feature-discover">
+                Découvrir <ArrowRight size={14} className="discover-arrow" />
+              </span>
+              <span className="feature-price">Sur devis</span>
+            </div>
+          </Link>
+ 
+          <Link to="/ateliers" className="feature-card">
+            <div className="feature-icon-wrapper">
+              <Flame className="feature-icon" size={24} />
+            </div>
             <h3>Ateliers Culinaires</h3>
             <p>Découvrez les secrets de la cuisine algérienne lors de cours et d'ateliers interactifs.</p>
-          </div>
+            <div className="feature-card-footer">
+              <span className="feature-discover">
+                Découvrir <ArrowRight size={14} className="discover-arrow" />
+              </span>
+              <span className="feature-price">À partir de<br />50€ / pers.</span>
+            </div>
+          </Link>
         </div>
       </div>
     </section>

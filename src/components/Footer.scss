@@ -1,0 +1,151 @@
+.footer {
+  background-color: var(--color-slate-dark);
+  color: white;
+  padding: 4rem 0 0;
+  border-top: 5px solid var(--color-gold);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-brand h3 {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  margin-bottom: 1rem;
+}
+
+.footer-about {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.badge-gironde {
+  background-color: rgba(197, 168, 128, 0.15);
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.footer-contact h4,
+.footer-hours h4 {
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.contact-list,
+.hours-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-list li,
+.hours-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-list a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.contact-list a:hover {
+  color: var(--color-gold);
+}
+
+.contact-icon,
+.hours-icon {
+  color: var(--color-gold);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.hours-note {
+  font-size: 0.8rem;
+  color: var(--color-gold-light);
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.footer-bottom {
+  background-color: hsl(215, 25%, 8%);
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.footer-legal a:hover {
+  color: white;
+}
+
+.dot {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================
+     MEDIA QUERIES - RESPONSIVE DESIGN
+     ========================================== */
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1.25rem 2rem;
+  }
+
+  .footer-bottom-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Footer */
+  .footer {
+    padding-top: 2.5rem;
+  }
+}
+

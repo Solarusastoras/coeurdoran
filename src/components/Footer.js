@@ -1,5 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import './Footer.scss';
 
 const InstagramIcon = ({ size = 18, className }) => (
   <svg
@@ -44,7 +45,7 @@ export default function Footer() {
     <footer className="footer" id="contact">
       <div className="footer-container">
         <div className="footer-brand">
-          <h3>Traiteur Cœur d’<span className="underlined-o">O</span>ran</h3>
+          <h3>Traiteur Cœur d’<span className="underlined-o">o</span>ran</h3>
           <p className="footer-about">
             Spécialités algériennes & pâtisseries orientales. Repas sur-mesure pour particuliers & professionnels. Basée à Bordeaux, ma maison sublime vos réceptions dans toute la Nouvelle-Aquitaine.
           </p>
@@ -99,7 +100,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div className="footer-bottom-container">
-          <p>&copy; {currentYear} Traiteur Cœur d’<span className="underlined-o">O</span>ran. Tous droits réservés. Bordeaux, France.</p>
+          <p>&copy; {currentYear} Traiteur Cœur d’<span className="underlined-o">o</span>ran. Tous droits réservés. Bordeaux, France.</p>
           <div className="footer-legal">
             <a href="#mentions">Mentions Légales</a>
             <span className="dot">•</span>

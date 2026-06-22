@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChefHat, Clock, Users, BookOpen, Check, Calendar, Mail, Phone, Sparkles, Heart } from 'lucide-react';
+import './Workshops.scss';
 
 export default function Workshops() {
   const [formData, setFormData] = useState({
@@ -109,7 +110,7 @@ export default function Workshops() {
             <span>Partage & Transmission</span>
           </div>
           <h1>
-            Ateliers Culinaires Cœur d’<span className="underlined-o">O</span>ran
+            Ateliers Culinaires Cœur d’<span className="underlined-o">o</span>ran
           </h1>
           <p>
             Découvrez les secrets de la cuisine traditionnelle algérienne lors de cours et d'ateliers interactifs animés par Djaouida. Venez partager un moment convivial et repartez avec un savoir-faire unique.
@@ -122,7 +123,7 @@ export default function Workshops() {
         <div className="workshops-list">
           <h2 className="section-title">Nos Ateliers Proposés</h2>
           <p className="section-subtitle">Sélectionnez l'atelier de votre choix pour découvrir les secrets d'un repas fait maison.</p>
-          
+
           <div className="workshops-grid">
             {workshopsList.map((workshop) => (
               <div key={workshop.id} className="workshop-card">
@@ -133,10 +134,10 @@ export default function Workshops() {
                     <span className="price-unit">/ pers</span>
                   </div>
                 </div>
-                
+
                 <div className="workshop-card-body">
                   <p className="workshop-desc">{workshop.description}</p>
-                  
+
                   <div className="workshop-meta">
                     <div className="meta-item">
                       <Clock size={16} />
@@ -166,7 +167,7 @@ export default function Workshops() {
                 </div>
 
                 <div className="workshop-card-footer">
-                  <button 
+                  <button
                     className="btn btn-primary btn-block"
                     onClick={() => {
                       setFormData({ ...formData, workshopId: workshop.id });
@@ -228,7 +229,7 @@ export default function Workshops() {
                 <p className="success-next-steps">
                   Djaouida étudie votre demande et prendra contact avec vous par téléphone au <strong>{formData.phone}</strong> ou par email à <strong>{formData.email}</strong>.
                 </p>
-                <button 
+                <button
                   className="btn btn-outline btn-block"
                   onClick={() => {
                     setIsSubmitted(false);
@@ -253,13 +254,13 @@ export default function Workshops() {
                     <span>{error}</span>
                   </div>
                 )}
-                
+
                 <div className="form-group">
                   <label htmlFor="workshopId">Choisir un Atelier <span className="required">*</span></label>
-                  <select 
-                    id="workshopId" 
-                    name="workshopId" 
-                    value={formData.workshopId} 
+                  <select
+                    id="workshopId"
+                    name="workshopId"
+                    value={formData.workshopId}
                     onChange={handleInputChange}
                     required
                   >
@@ -272,40 +273,40 @@ export default function Workshops() {
 
                 <div className="form-group">
                   <label htmlFor="name">Nom Complet <span className="required">*</span></label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    placeholder="Votre prénom et nom" 
-                    value={formData.name} 
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Votre prénom et nom"
+                    value={formData.name}
                     onChange={handleInputChange}
-                    required 
+                    required
                   />
                 </div>
 
                 <div className="form-group-row">
                   <div className="form-group">
                     <label htmlFor="email">Adresse E-mail <span className="required">*</span></label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      name="email" 
-                      placeholder="exemple@email.com" 
-                      value={formData.email} 
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="exemple@email.com"
+                      value={formData.email}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div className="form-group">
                     <label htmlFor="phone">Téléphone <span className="required">*</span></label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone" 
-                      placeholder="06 12 34 56 78" 
-                      value={formData.phone} 
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="06 12 34 56 78"
+                      value={formData.phone}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                 </div>
@@ -313,38 +314,38 @@ export default function Workshops() {
                 <div className="form-group-row">
                   <div className="form-group">
                     <label htmlFor="date">Date Souhaitée <span className="required">*</span></label>
-                    <input 
-                      type="date" 
-                      id="date" 
-                      name="date" 
-                      value={formData.date} 
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      value={formData.date}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div className="form-group">
                     <label htmlFor="participants">Nombre de places <span className="required">*</span></label>
-                    <input 
-                      type="number" 
-                      id="participants" 
-                      name="participants" 
-                      min="1" 
-                      max="12" 
-                      value={formData.participants} 
+                    <input
+                      type="number"
+                      id="participants"
+                      name="participants"
+                      min="1"
+                      max="12"
+                      value={formData.participants}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="notes">Remarques ou demandes particulières</label>
-                  <textarea 
-                    id="notes" 
-                    name="notes" 
-                    rows="3" 
-                    placeholder="Allergies, événement spécial, privatisation..." 
-                    value={formData.notes} 
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    rows="3"
+                    placeholder="Allergies, événement spécial, privatisation..."
+                    value={formData.notes}
                     onChange={handleInputChange}
                   />
                 </div>

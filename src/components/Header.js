@@ -1,60 +1,93 @@
 import React from 'react';
-import { ChefHat, BookOpen, Settings2, Sparkles, BookHeart } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { ChefHat, BookOpen, Settings2, Sparkles, BookHeart, Utensils, Wine, Coffee, Flame, ChevronDown } from 'lucide-react';
+import './Header.scss';
 
-export default function Header({ activeTab, setActiveTab, isAdmin }) {
+export default function Header({ isAdmin }) {
+  const location = useLocation();
+  const isCateringActive = ['/repas-assis', '/buffet', '/cocktail', '/brunch', '/ateliers'].some(
+    (path) => location.pathname === path
+  );
+
   return (
     <header className="header">
       <div className="header-container">
-        <div className="header-logo" onClick={() => setActiveTab('client')}>
-          <img src="/logo512.png" alt="Logo Traiteur Cœur d’Oran" className="header-logo-img" />
+        <NavLink to="/" className="header-logo" style={{ textDecoration: 'none' }}>
+          <img src="/logo.svg" alt="Logo Traiteur Cœur d’Oran" className="header-logo-img" />
           <div className="logo-text">
-            <h2> Cœur d’<span className="underlined-o">O</span>ran</h2>
+            <h2> Cœur d’<span className="underlined-o">o</span>ran</h2>
             <span className="logo-subtitle">Traiteur • Spécialités Algériennes • Bordeaux</span>
           </div>
-        </div>
+        </NavLink>
 
         <nav className="header-nav">
-          <button
-            className={`nav-link ${activeTab === 'client' ? 'active' : ''}`}
-            onClick={() => setActiveTab('client')}
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
           >
             <Sparkles size={18} />
             <span>La Carte</span>
-          </button>
+          </NavLink>
 
-          <button
-            className={`nav-link ${activeTab === 'workshops' ? 'active' : ''}`}
-            onClick={() => setActiveTab('workshops')}
-          >
-            <ChefHat size={18} />
-            <span>Ateliers Culinaires</span>
-          </button>
+          <div className="nav-dropdown-wrapper">
+            <NavLink
+              to="/repas-assis"
+              className={`nav-link dropdown-trigger ${isCateringActive ? 'active' : ''}`}
+            >
+              <Utensils size={18} />
+              <span>Formules Traiteur</span>
+              <ChevronDown size={14} className="dropdown-chevron" />
+            </NavLink>
+            <div className="dropdown-menu">
+              <NavLink to="/repas-assis" className="dropdown-item">
+                <Utensils size={16} />
+                <span>Repas Assis</span>
+              </NavLink>
+              <NavLink to="/buffet" className="dropdown-item">
+                <ChefHat size={16} />
+                <span>Buffets</span>
+              </NavLink>
+              <NavLink to="/cocktail" className="dropdown-item">
+                <Wine size={16} />
+                <span>Cocktails</span>
+              </NavLink>
+              <NavLink to="/brunch" className="dropdown-item">
+                <Coffee size={16} />
+                <span>Matinées & Brunchs</span>
+              </NavLink>
+              <NavLink to="/ateliers" className="dropdown-item">
+                <Flame size={16} />
+                <span>Ateliers Culinaires</span>
+              </NavLink>
+            </div>
+          </div>
 
-          <button
-            className={`nav-link ${activeTab === 'histoire' ? 'active' : ''}`}
-            onClick={() => setActiveTab('histoire')}
+          <NavLink
+            to="/histoire"
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
           >
             <BookHeart size={18} />
             <span>Mon Histoire</span>
-          </button>
+          </NavLink>
 
           {isAdmin && (
-            <button
-              className={`nav-link ${activeTab === 'booklet' ? 'active' : ''}`}
-              onClick={() => setActiveTab('booklet')}
+            <NavLink
+              to="/booklet"
+              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             >
               <BookOpen size={18} />
               <span>Créer un Fascicule</span>
-            </button>
+            </NavLink>
           )}
 
-          <button
-            className={`nav-link ${activeTab === 'admin' ? 'active' : ''}`}
-            onClick={() => setActiveTab('admin')}
+          <NavLink
+            to="/admin"
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
           >
             <Settings2 size={18} />
             <span>{isAdmin ? 'Admin (Connecté)' : 'Espace Admin'}</span>
-          </button>
+          </NavLink>
         </nav>
       </div>
     </header>

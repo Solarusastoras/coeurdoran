@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import MenuCatalog from './components/MenuCatalog';
 import MenuBooklet from './components/MenuBooklet';
 import AdminPanel from './components/AdminPanel';
-import About from './components/About';
 import Footer from './components/Footer';
 import Workshops from './components/Workshops';
 import NotreHistoire from './components/NotreHistoire';
-import CateringFormulas from './components/CateringFormulas';
+import RepasAssis from './pages/RepasAssis';
+import Buffet from './pages/Buffet';
+import Cocktail from './pages/Cocktail';
+import Brunch from './pages/Brunch';
 import { getMenu } from './utils/api';
 import { Loader2, AlertCircle } from 'lucide-react';
-import './App.css';
+import './App.scss';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('client'); // client, workshops, booklet, admin
   const [isAdmin, setIsAdmin] = useState(false); // État d'authentification administrateur
   const [menuItems, setMenuItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +55,7 @@ export default function App() {
   return (
     <div className="app-container">
       {/* Barre de navigation supérieure (Masquée à l'impression via CSS) */}
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} isAdmin={isAdmin} />
+      <Header isAdmin={isAdmin} />
 
       <main className="main-content">
         {/* Affichage d'erreur si le backend est hors ligne */}
@@ -82,45 +84,73 @@ export default function App() {
             <p style={{ color: 'var(--color-slate-light)', fontWeight: 500 }}>Chargement de la carte depuis le NAS...</p>
           </div>
         ) : (
-          <>
-            {/* Rendu dynamique des sections en fonction de l'onglet actif */}
-            {activeTab === 'client' && (
+          <Routes>
+            <Route path="/" element={
               <>
                 <Hero onExplore={() => document.getElementById('menu-catalog')?.scrollIntoView({ behavior: 'smooth' })} />
                 <div className="container">
                   <MenuCatalog menuItems={menuItems} />
                 </div>
               </>
-            )}
+            } />
 
-            {activeTab === 'workshops' && (
+            <Route path="/repas-assis" element={
+              <div className="container">
+                <RepasAssis />
+              </div>
+            } />
+
+            <Route path="/buffet" element={
+              <div className="container">
+                <Buffet />
+              </div>
+            } />
+
+            <Route path="/cocktail" element={
+              <div className="container">
+                <Cocktail />
+              </div>
+            } />
+
+            <Route path="/brunch" element={
+              <div className="container">
+                <Brunch />
+              </div>
+            } />
+
+            <Route path="/ateliers" element={
               <div className="container">
                 <Workshops />
               </div>
-            )}
+            } />
 
-            {activeTab === 'histoire' && (
-              <NotreHistoire setActiveTab={setActiveTab} />
-            )}
+            <Route path="/histoire" element={
+              <NotreHistoire />
+            } />
 
-            {activeTab === 'booklet' && isAdmin && (
-              <div className="container">
-                <MenuBooklet menuItems={menuItems} />
-              </div>
-            )}
+            <Route path="/booklet" element={
+              isAdmin ? (
+                <div className="container">
+                  <MenuBooklet menuItems={menuItems} />
+                </div>
+              ) : (
+                <Navigate to="/admin" replace />
+              )
+            } />
 
-            {activeTab === 'admin' && (
+            <Route path="/admin" element={
               <div className="container">
                 <AdminPanel
                   menuItems={menuItems}
                   onRefresh={fetchMenu}
                   isAdmin={isAdmin}
                   setIsAdmin={setIsAdmin}
-                  setActiveTab={setActiveTab}
                 />
               </div>
-            )}
-          </>
+            } />
+
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         )}
       </main>
 

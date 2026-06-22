@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Search, Sparkles, AlertCircle } from 'lucide-react';
+import { Search, Sparkles, AlertCircle, X } from 'lucide-react';
 import { getImageUrl } from '../utils/api';
+import './MenuCatalog.scss';
 
 export default function MenuCatalog({ menuItems }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeImage, setActiveImage] = useState(null);
 
   const categories = [
     { id: 'all', label: 'Tous les délices' },
@@ -40,7 +42,11 @@ export default function MenuCatalog({ menuItems }) {
     const imgUrl = getImageUrl(item.image);
     return (
       <div key={item.id} className="menu-card">
-        <div className="menu-card-image-container">
+        <div 
+          className="menu-card-image-container"
+          style={{ cursor: imgUrl ? 'pointer' : 'default' }}
+          onClick={imgUrl ? () => setActiveImage({ src: imgUrl, alt: item.name, title: item.name }) : undefined}
+        >
           {imgUrl ? (
             <img 
               src={imgUrl} 
@@ -163,6 +169,18 @@ export default function MenuCatalog({ menuItems }) {
         <div className="no-results">
           <h3>Aucun plat trouvé</h3>
           <p>Essayez de modifier vos filtres ou d'affiner votre recherche.</p>
+        </div>
+      )}
+      {/* Lightbox Modal for Dish Images */}
+      {activeImage && (
+        <div className="image-modal-overlay" onClick={() => setActiveImage(null)}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setActiveImage(null)} aria-label="Fermer">
+              <X size={28} />
+            </button>
+            <img src={activeImage.src} alt={activeImage.alt} className="modal-full-image" />
+            <p className="modal-image-caption">{activeImage.title}</p>
+          </div>
         </div>
       )}
     </section>
