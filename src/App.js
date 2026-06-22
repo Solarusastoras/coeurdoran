@@ -100,7 +100,7 @@ export default function App() {
             )}
 
             {activeTab === 'histoire' && (
-              <NotreHistoire />
+              <NotreHistoire setActiveTab={setActiveTab} />
             )}
 
             {activeTab === 'booklet' && isAdmin && (

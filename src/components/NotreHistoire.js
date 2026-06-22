@@ -1,141 +1,197 @@
-import React from 'react';
-import { Heart, Sparkles, Leaf, Award, MapPin, Star } from 'lucide-react';
+import React, { useState } from 'react';
 
-const VALUES = [
+const services = [
   {
-    icon: <Heart size={22} />,
-    label: 'Fait Maison',
-    desc: 'Chaque plat, chaque pièce, préparé avec patience et générosité.',
+    id: 'traiteur',
+    title: 'Traiteur Oriental',
+    desc: 'Découvrez nos spécialités algériennes sur-mesure pour vos événements privés et professionnels sur Bordeaux et la Gironde.',
+    cta: 'Voir la carte',
+    tab: 'client',
+    bg: 'card-bg-traiteur',
+    emoji: '🍲',
   },
   {
-    icon: <Leaf size={22} />,
-    label: 'Éco-Responsable',
-    desc: 'Des produits de qualité, choisis avec soin et respect de la saison.',
-  },
-  {
-    icon: <Award size={22} />,
-    label: 'Saveurs Authentiques',
-    desc: 'Recettes de famille, transmises et revisitées avec une touche unique.',
-  },
-  {
-    icon: <MapPin size={22} />,
-    label: 'Basée à Bordeaux',
-    desc: 'Traiteur de proximité, livraison & ateliers sur Bordeaux et alentours.',
+    id: 'ateliers',
+    title: 'Ateliers Culinaires',
+    desc: 'Venez apprendre et partager les secrets de la cuisine algérienne lors de cours animés par Djaouida. Pour tous les niveaux.',
+    cta: 'Voir les ateliers',
+    tab: 'workshops',
+    bg: 'card-bg-ateliers',
+    emoji: '👩‍🍳',
   },
 ];
 
-export default function NotreHistoire() {
-  return (
-    <div className="histoire-page">
-      {/* ─── HERO BANNER ─── */}
-      <div className="histoire-hero">
-        <div className="histoire-hero-overlay" />
-        <div className="histoire-hero-content">
-          <div className="hero-badge">
-            <Sparkles size={14} />
-            <span>Notre Histoire</span>
-          </div>
-          <h1>
-            Pour me <span className="text-gold">connaître</span>
-          </h1>
-          <p>Une histoire de cœur, de courage et de cuisine.</p>
-        </div>
-      </div>
+const valeurs = [
+  { emoji: '🧑‍🍳', label: 'Fait Maison', desc: 'Chaque plat, chaque pièce, préparée avec patience et générosité.' },
+  { emoji: '🌿', label: 'Éco-Responsable', desc: 'Des produits de qualité, choisis avec soin et respect de la saison.' },
+  { emoji: '🫙', label: 'Recettes de Famille', desc: 'Des saveurs authentiques transmises de génération en génération.' },
+  { emoji: '📍', label: 'Bordeaux & Gironde', desc: 'Traiteur de proximité, présente sur tout le département.' },
+];
 
-      {/* ─── MAIN STORY SECTION ─── */}
-      <div className="histoire-body">
-        {/* Left: portrait */}
-        <div className="histoire-portrait-col">
-          <div className="portrait-frame">
-            <div className="portrait-img-wrapper">
+export default function NotreHistoire({ setActiveTab }) {
+  return (
+    <div className="nh-page">
+
+      {/* ════════════════════════════════
+          SECTION 1 — Hero 50/50 (style Marie Curry)
+          2 grandes cartes images côte à côte
+      ════════════════════════════════ */}
+      <section className="nh-hero-split">
+        {services.map((s) => (
+          <div className={`nh-split-card ${s.bg}`} key={s.id}>
+            <div className="nh-split-card-inner">
+              <div className="nh-split-emoji">{s.emoji}</div>
+              <h2 className="nh-split-title">{s.title}</h2>
+              <p className="nh-split-desc">{s.desc}</p>
+              {setActiveTab && (
+                <button
+                  className="nh-split-btn"
+                  onClick={() => setActiveTab(s.tab)}
+                >
+                  {s.cta}
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* ════════════════════════════════
+          SECTION 2 — C'est quoi ?
+          Photo gauche / grand texte droite (style Marie Curry)
+          fond blanc, texte grand et aéré
+      ════════════════════════════════ */}
+      <section className="nh-cest-quoi">
+        {/* Colonne gauche : photo */}
+        <div className="nh-cq-photo-col">
+          <div className="nh-cq-photo-frame">
+            <img
+              src="/logo512.png"
+              alt="Djaouida, fondatrice de Cœur d'Oran"
+              className="nh-cq-photo"
+            />
+            {/* Badge flottant */}
+            <div className="nh-cq-badge">
+              <span>🇩🇿</span>
+              <span>Oranaise · Bordeaux</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Colonne droite : texte */}
+        <div className="nh-cq-text-col">
+          <h1 className="nh-cq-headline">
+            Cœur d'Oran,<br />
+            c'est quoi&nbsp;?
+          </h1>
+
+          <p className="nh-cq-body">
+            Cœur d'Oran, c'est une histoire de <strong>cœur, de courage et de cuisine</strong>.
+          </p>
+          <p className="nh-cq-body">
+            Je m'appelle <strong>Djaouida</strong>. Originaire d'Algérie, ancienne fonctionnaire de police, j'ai toujours porté en moi l'amour des bons plats — de ceux que l'on prépare avec patience et générosité.
+          </p>
+          <p className="nh-cq-body">
+            Après un nouveau départ en France, j'ai choisi de me réinventer à travers ce qui m'anime depuis toujours : la cuisine. C'est ainsi qu'est né <strong>Cœur d'Oran</strong> : un traiteur oriental éco-responsable, où chaque plat est fait maison, avec des produits de qualité et une vraie volonté de bien manger.
+          </p>
+
+          {/* Phrase-clé capslock couleur (style Marie Curry) */}
+          <p className="nh-cq-keyphrase">
+            Manger Cœur d'Oran, c'est se laisser voyager en Algérie avec des saveurs raffinées, des recettes de famille et une touche bien à moi.
+          </p>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════
+          SECTION 3 — 2 grands titres split (style ESUS section)
+          Fond beige, grand texte bold 2 colonnes
+      ════════════════════════════════ */}
+      <section className="nh-pillars-header-split">
+        <div className="nh-ph-left">
+          <p className="nh-ph-big">Un traiteur<br />fait maison</p>
+        </div>
+        <div className="nh-ph-divider" />
+        <div className="nh-ph-right">
+          <p className="nh-ph-big">Une cuisine<br />éco-responsable</p>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════
+          SECTION 4 — Grille piliers avec illustrations (style Marie Curry)
+          Fond beige, 3 colonnes, grandes illustrations en trait
+      ════════════════════════════════ */}
+      <section className="nh-pillars-grid-section">
+        {valeurs.map((v, i) => (
+          <div className="nh-pillar-item" key={i}>
+            <div className="nh-pillar-illus">{v.emoji}</div>
+            <h3 className="nh-pillar-title">{v.label}</h3>
+            <p className="nh-pillar-text">{v.desc}</p>
+          </div>
+        ))}
+      </section>
+
+      {/* ════════════════════════════════
+          SECTION 5 — Portrait circulaire sur fond sombre
+          (style Marie Curry équipe, fond vert sombre)
+      ════════════════════════════════ */}
+      <section className="nh-team-dark">
+        <h2 className="nh-team-title">La fondatrice</h2>
+
+        <div className="nh-team-portrait-wrap">
+          {/* Portrait centré, agrandi, style Marie Curry */}
+          <div className="nh-team-portrait-card">
+            <div className="nh-team-portrait-circle">
               <img
                 src="/logo512.png"
-                alt="Djaouida, fondatrice de Cœur d'Oran"
-                className="portrait-img"
-                onError={e => { e.target.style.display = 'none'; }}
+                alt="Djaouida"
+                className="nh-team-portrait-img"
               />
-              <div className="portrait-fallback">
-                <span>D</span>
-              </div>
             </div>
-            <div className="portrait-caption">
-              <div className="portrait-name-badge">
-                <Star size={14} className="portrait-star" />
-                <span>Djaouida</span>
-              </div>
-              <p>Fondatrice & Créatrice</p>
-              <p className="portrait-flag">🇩🇿 Originaire d'Oran · Bordeaux</p>
-            </div>
-          </div>
-
-          {/* Floating quote card */}
-          <div className="histoire-quote-card">
-            <span className="histoire-quote-mark">"</span>
-            <p>
-              Mon ambition ? Vous faire voyager en Algérie avec des saveurs raffinées, des recettes de famille et une touche bien à moi.
-            </p>
-            <span className="histoire-quote-emoji">🇩🇿✨</span>
+            <p className="nh-team-name">Djaouida</p>
+            <p className="nh-team-role">Créatrice &amp; Fondatrice</p>
+            <p className="nh-team-origin">Oranaise 🇩🇿</p>
           </div>
         </div>
 
-        {/* Right: text */}
-        <div className="histoire-text-col">
-          <div className="histoire-lead-block">
-            <p className="histoire-lead">
-              Je m'appelle Djaouida, et derrière Cœur d'Oran, c'est une histoire de cœur, de courage et de cuisine.
-            </p>
-          </div>
+        {/* Grande citation, style Marie Curry */}
+        <blockquote className="nh-team-quote">
+          <span className="nh-quote-mark">"</span>
+          Mon ambition&nbsp;? Vous faire voyager en Algérie avec des saveurs raffinées, des recettes de famille et une touche bien à moi.
+          <span className="nh-quote-mark">"</span>
+        </blockquote>
 
-          <div className="histoire-paragraphs">
-            <p>
-              Originaire d'Algérie, ancienne fonctionnaire de police, j'ai toujours porté en moi l'amour des bons plats — de ceux que l'on prépare avec patience et générosité.
-            </p>
-            <p>
-              Après un nouveau départ en France, j'ai choisi de me réinventer à travers ce qui m'anime depuis toujours : la cuisine. C'est ainsi qu'est né <strong>Cœur d'Oran</strong> : un traiteur oriental éco-responsable, où chaque plat, chaque pièce est fait maison, avec des produits de qualité et une vraie volonté de bien manger.
-            </p>
-          </div>
+        {/* Signature sous la citation */}
+        <p className="nh-team-sig">— Djaouida, Bordeaux ✨</p>
+      </section>
 
-          {/* Signature block */}
-          <div className="histoire-signature">
-            <div className="signature-bar" />
-            <div className="signature-content">
-              <div className="signature-heart-icon">
-                <Heart size={18} fill="currentColor" />
-              </div>
-              <div>
-                <span className="signature-main-name">Djaouida</span>
-                <span className="signature-role">Créatrice de Cœur d'Oran</span>
-              </div>
-            </div>
-          </div>
+      {/* ════════════════════════════════
+          SECTION 6 — CTA final sur fond clair
+          2 cartes côte à côte avec bouton coloré
+      ════════════════════════════════ */}
+      <section className="nh-cta-section">
+        <div className="nh-cta-card nh-cta-olive">
+          <div className="nh-cta-emoji">🍽️</div>
+          <h3>Traiteur Oriental</h3>
+          <p>Commandez vos plats algériens pour vos événements en Gironde.</p>
+          {setActiveTab && (
+            <button className="nh-cta-btn nh-cta-btn-olive" onClick={() => setActiveTab('client')}>
+              Voir la carte
+            </button>
+          )}
         </div>
-      </div>
 
-      {/* ─── VALUES STRIP ─── */}
-      <div className="histoire-values-strip">
-        <div className="histoire-values-header">
-          <h2 className="section-title">Nos Engagements</h2>
-          <p className="section-subtitle">Ce qui nous définit chaque jour</p>
+        <div className="nh-cta-card nh-cta-terra">
+          <div className="nh-cta-emoji">👩‍🍳</div>
+          <h3>Ateliers Culinaires</h3>
+          <p>Apprenez les secrets de la cuisine algérienne avec Djaouida.</p>
+          {setActiveTab && (
+            <button className="nh-cta-btn nh-cta-btn-terra" onClick={() => setActiveTab('workshops')}>
+              Voir les ateliers
+            </button>
+          )}
         </div>
-        <div className="histoire-values-grid">
-          {VALUES.map((v, i) => (
-            <div className="histoire-value-card" key={i}>
-              <div className="value-icon-ring">{v.icon}</div>
-              <h3>{v.label}</h3>
-              <p>{v.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      </section>
 
-      {/* ─── BOTTOM CTA ─── */}
-      <div className="histoire-cta-section">
-        <div className="histoire-cta-card">
-          <Sparkles size={28} className="cta-sparkle" />
-          <h2>Prêt à voyager en Algérie ?</h2>
-          <p>Découvrez notre carte de spécialités et laissez-vous séduire par les saveurs de Djaouida.</p>
-        </div>
-      </div>
     </div>
   );
 }
