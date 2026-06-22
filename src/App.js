@@ -8,6 +8,7 @@ import About from './components/About';
 import Footer from './components/Footer';
 import Workshops from './components/Workshops';
 import NotreHistoire from './components/NotreHistoire';
+import CateringFormulas from './components/CateringFormulas';
 import { getMenu } from './utils/api';
 import { Loader2, AlertCircle } from 'lucide-react';
 import './App.css';
@@ -85,9 +86,9 @@ export default function App() {
             {/* Rendu dynamique des sections en fonction de l'onglet actif */}
             {activeTab === 'client' && (
               <>
-                <Hero onExplore={() => document.getElementById('menu-catalog')?.scrollIntoView({ behavior: 'smooth' })} />
+                <Hero onExplore={() => document.getElementById('menu-formulas')?.scrollIntoView({ behavior: 'smooth' })} />
                 <div className="container">
-                  <MenuCatalog menuItems={menuItems} />
+                  <CateringFormulas />
                   <About />
                 </div>
               </>
