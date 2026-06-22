@@ -66,7 +66,7 @@ export default function NotreHistoire({ setActiveTab }) {
         <div className="nh-cq-photo-col">
           <div className="nh-cq-photo-frame">
             <img
-              src="/logo512.png"
+              src="/djaouida_portrait.png"
               alt="Djaouida, fondatrice de Cœur d'Oran"
               className="nh-cq-photo"
             />
@@ -142,7 +142,7 @@ export default function NotreHistoire({ setActiveTab }) {
           <div className="nh-team-portrait-card">
             <div className="nh-team-portrait-circle">
               <img
-                src="/logo512.png"
+                src="/djaouida_portrait.png"
                 alt="Djaouida"
                 className="nh-team-portrait-img"
               />

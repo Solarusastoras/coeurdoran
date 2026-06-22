@@ -9,8 +9,7 @@ export default function Header({ activeTab, setActiveTab, isAdmin }) {
           <img src="/logo512.png" alt="Logo Traiteur Cœur d’Oran" className="header-logo-img" />
           <div className="logo-text">
             <h2> Cœur d’<span className="underlined-o">O</span>ran</h2>
-            <span>Traiteur</span>
-            <span className="logo-subtitle">Spécialités Algériennes • Bordeaux</span>
+            <span className="logo-subtitle">Traiteur • Spécialités Algériennes • Bordeaux</span>
           </div>
         </div>
 
