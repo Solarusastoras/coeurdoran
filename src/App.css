@@ -2568,7 +2568,7 @@ h4,
    ═══════════════════════════════════════ */
 .nh-cest-quoi {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.7fr 1.3fr;
   min-height: 600px;
   background: white;
 }
@@ -2589,7 +2589,7 @@ h4,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
   display: block;
 }
 
@@ -2778,8 +2778,8 @@ h4,
 }
 
 .nh-team-portrait-circle {
-  width: 260px;
-  height: 300px;
+  width: 180px;
+  height: 210px;
   border-radius: 20px;
   overflow: hidden;
   border: 3px solid var(--color-gold);
@@ -2991,8 +2991,8 @@ h4,
   }
 
   .nh-team-portrait-circle {
-    width: 200px;
-    height: 230px;
+    width: 140px;
+    height: 160px;
   }
 
   .nh-cq-text-col {

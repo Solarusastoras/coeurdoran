@@ -23,8 +23,8 @@ const services = [
 
 const valeurs = [
   { emoji: '🧑‍🍳', label: 'Fait Maison', desc: 'Chaque plat, chaque pièce, préparée avec patience et générosité.' },
-  { emoji: '🌿', label: 'Éco-Responsable', desc: 'Des produits de qualité, choisis avec soin et respect de la saison.' },
-  { emoji: '🫙', label: 'Recettes de Famille', desc: 'Des saveurs authentiques transmises de génération en génération.' },
+  { emoji: '🍃', label: 'Éco-Responsable', desc: 'Des produits de qualité, choisis avec soin et respect de la saison.' },
+  { emoji: '📖', label: 'Recettes de Famille', desc: 'Des saveurs authentiques transmises de génération en génération.' },
   { emoji: '📍', label: 'Gironde & Nouvelle-Aquitaine', desc: 'Traiteur de proximité, présente sur tout le département.' },
 ];
 
@@ -32,29 +32,6 @@ export default function NotreHistoire({ setActiveTab }) {
   return (
     <div className="nh-page">
 
-      {/* ════════════════════════════════
-          SECTION 1 — Hero 50/50 (style Marie Curry)
-          2 grandes cartes images côte à côte
-      ════════════════════════════════ */}
-      <section className="nh-hero-split">
-        {services.map((s) => (
-          <div className={`nh-split-card ${s.bg}`} key={s.id}>
-            <div className="nh-split-card-inner">
-              <div className="nh-split-emoji">{s.emoji}</div>
-              <h2 className="nh-split-title">{s.title}</h2>
-              <p className="nh-split-desc">{s.desc}</p>
-              {setActiveTab && (
-                <button
-                  className="nh-split-btn"
-                  onClick={() => setActiveTab(s.tab)}
-                >
-                  {s.cta}
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
-      </section>
 
       {/* ════════════════════════════════
           SECTION 2 — C'est quoi ?
@@ -162,34 +139,6 @@ export default function NotreHistoire({ setActiveTab }) {
 
         {/* Signature sous la citation */}
         <p className="nh-team-sig">— Djaouida, Bordeaux ✨</p>
-      </section>
-
-      {/* ════════════════════════════════
-          SECTION 6 — CTA final sur fond clair
-          2 cartes côte à côte avec bouton coloré
-      ════════════════════════════════ */}
-      <section className="nh-cta-section">
-        <div className="nh-cta-card nh-cta-olive">
-          <div className="nh-cta-emoji">🍽️</div>
-          <h3>Traiteur Oriental</h3>
-          <p>Commandez vos plats algériens pour vos événements en Gironde.</p>
-          {setActiveTab && (
-            <button className="nh-cta-btn nh-cta-btn-olive" onClick={() => setActiveTab('client')}>
-              Voir la carte
-            </button>
-          )}
-        </div>
-
-        <div className="nh-cta-card nh-cta-terra">
-          <div className="nh-cta-emoji">👩‍🍳</div>
-          <h3>Ateliers Culinaires</h3>
-          <p>Apprenez les secrets de la cuisine algérienne avec Djaouida.</p>
-          {setActiveTab && (
-            <button className="nh-cta-btn nh-cta-btn-terra" onClick={() => setActiveTab('workshops')}>
-              Voir les ateliers
-            </button>
-          )}
-        </div>
       </section>
 
     </div>
