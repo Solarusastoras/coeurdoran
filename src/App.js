@@ -7,6 +7,7 @@ import AdminPanel from './components/AdminPanel';
 import About from './components/About';
 import Footer from './components/Footer';
 import Workshops from './components/Workshops';
+import NotreHistoire from './components/NotreHistoire';
 import { getMenu } from './utils/api';
 import { Loader2, AlertCircle } from 'lucide-react';
 import './App.css';
@@ -96,6 +97,10 @@ export default function App() {
               <div className="container">
                 <Workshops />
               </div>
+            )}
+
+            {activeTab === 'histoire' && (
+              <NotreHistoire />
             )}
 
             {activeTab === 'booklet' && isAdmin && (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChefHat, BookOpen, Settings2, Sparkles } from 'lucide-react';
+import { ChefHat, BookOpen, Settings2, Sparkles, BookHeart } from 'lucide-react';
 
 export default function Header({ activeTab, setActiveTab, isAdmin }) {
   return (
@@ -29,6 +29,14 @@ export default function Header({ activeTab, setActiveTab, isAdmin }) {
           >
             <ChefHat size={18} />
             <span>Ateliers Culinaires</span>
+          </button>
+
+          <button
+            className={`nav-link ${activeTab === 'histoire' ? 'active' : ''}`}
+            onClick={() => setActiveTab('histoire')}
+          >
+            <BookHeart size={18} />
+            <span>Notre Histoire</span>
           </button>
 
           {isAdmin && (
