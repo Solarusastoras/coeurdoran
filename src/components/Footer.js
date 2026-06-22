@@ -46,7 +46,7 @@ export default function Footer() {
         <div className="footer-brand">
           <h3>Traiteur Cœur d’<span className="underlined-o">O</span>ran</h3>
           <p className="footer-about">
-            Spécialités algériennes & pâtisseries orientales. Repas sur-mesure pour particuliers & professionnels. Basée à Bordeaux, notre maison sublime vos réceptions dans toute la Nouvelle-Aquitaine.
+            Spécialités algériennes & pâtisseries orientales. Repas sur-mesure pour particuliers & professionnels. Basée à Bordeaux, ma maison sublime vos réceptions dans toute la Nouvelle-Aquitaine.
           </p>
           <div className="footer-badges">
             <span className="badge-gironde">Prestations Gironde & Nouvelle-Aquitaine</span>

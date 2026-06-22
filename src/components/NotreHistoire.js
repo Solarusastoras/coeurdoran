@@ -25,7 +25,7 @@ const valeurs = [
   { emoji: '🧑‍🍳', label: 'Fait Maison', desc: 'Chaque plat, chaque pièce, préparée avec patience et générosité.' },
   { emoji: '🌿', label: 'Éco-Responsable', desc: 'Des produits de qualité, choisis avec soin et respect de la saison.' },
   { emoji: '🫙', label: 'Recettes de Famille', desc: 'Des saveurs authentiques transmises de génération en génération.' },
-  { emoji: '📍', label: 'Bordeaux & Gironde', desc: 'Traiteur de proximité, présente sur tout le département.' },
+  { emoji: '📍', label: 'Gironde & Nouvelle-Aquitaine', desc: 'Traiteur de proximité, présente sur tout le département.' },
 ];
 
 export default function NotreHistoire({ setActiveTab }) {

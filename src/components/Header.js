@@ -19,7 +19,7 @@ export default function Header({ activeTab, setActiveTab, isAdmin }) {
             onClick={() => setActiveTab('client')}
           >
             <Sparkles size={18} />
-            <span>Notre Carte</span>
+            <span>La Carte</span>
           </button>
 
           <button
@@ -35,7 +35,7 @@ export default function Header({ activeTab, setActiveTab, isAdmin }) {
             onClick={() => setActiveTab('histoire')}
           >
             <BookHeart size={18} />
-            <span>Notre Histoire</span>
+            <span>Mon Histoire</span>
           </button>
 
           {isAdmin && (

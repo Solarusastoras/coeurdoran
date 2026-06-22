@@ -86,10 +86,9 @@ export default function App() {
             {/* Rendu dynamique des sections en fonction de l'onglet actif */}
             {activeTab === 'client' && (
               <>
-                <Hero onExplore={() => document.getElementById('menu-formulas')?.scrollIntoView({ behavior: 'smooth' })} />
+                <Hero onExplore={() => document.getElementById('menu-catalog')?.scrollIntoView({ behavior: 'smooth' })} />
                 <div className="container">
-                  <CateringFormulas />
-                  <About />
+                  <MenuCatalog menuItems={menuItems} />
                 </div>
               </>
             )}

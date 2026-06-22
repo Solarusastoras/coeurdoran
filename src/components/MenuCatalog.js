@@ -72,8 +72,7 @@ export default function MenuCatalog({ menuItems }) {
 
         <div className="menu-card-content">
           <div className="menu-card-header">
-            <h3 className="menu-card-title">{item.name}</h3>
-            <span className="menu-card-price">{formatPrice(item.price)}</span>
+            <h3 className="menu-card-title" style={{ width: '100%' }}>{item.name}</h3>
           </div>
           
           <p className="menu-card-desc">{item.description}</p>
