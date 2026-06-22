@@ -39,7 +39,7 @@ export default function RepasAssis() {
               <div className="menu-section-item">
                 <div className="item-title-row">
                   <h3>Entrée</h3>
-                  <span className="item-price">5,00 €</span>
+                  <span className="item-price">À partir de 5,00 €</span>
                 </div>
                 <p className="item-choices">Pastilla croustillante aux amandes, Bourek traditionnel doré, Harira parfumée ou Chorba Frik au blé concassé.</p>
               </div>
@@ -47,7 +47,7 @@ export default function RepasAssis() {
               <div className="menu-section-item">
                 <div className="item-title-row">
                   <h3>Plat</h3>
-                  <span className="item-price">13,00 €</span>
+                  <span className="item-price">À partir de 13,00 €</span>
                 </div>
                 <p className="item-choices">Couscous traditionnel généreux aux légumes et viandes fondantes, ou Tajine mijoté aux légumes de saison avec épices secrètes.</p>
               </div>
@@ -55,7 +55,7 @@ export default function RepasAssis() {
               <div className="menu-section-item">
                 <div className="item-title-row">
                   <h3>Dessert</h3>
-                  <span className="item-price">4,00 €</span>
+                  <span className="item-price">À partir de 4,00 €</span>
                 </div>
                 <p className="item-choices">Salade de fruits frais de saison parfumée à la fleur d'oranger & menthe, ou Crème de riz traditionnelle (Mahalabiya) cannelle & fleur d'oranger.</p>
               </div>
@@ -70,7 +70,7 @@ export default function RepasAssis() {
           <div className="prestation-formulas-card">
             <div className="formulas-header">
               <Sparkles size={20} className="sparkle-icon" />
-              <h2>Nos Formules Sevrées</h2>
+              <h2>Nos Formules Servies</h2>
             </div>
 
             <div className="formulas-list">
@@ -79,7 +79,10 @@ export default function RepasAssis() {
                   <h3>Formule Plat + Dessert</h3>
                   <p>La simplicité gourmande d'un plat mijoté suivi d'une touche sucrée.</p>
                 </div>
-                <div className="formula-price-tag">16€ <span className="price-unit">/ pers.</span></div>
+                <div className="formula-price-tag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
+                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
+                  <span>16€ <span className="price-unit">/ pers.</span></span>
+                </div>
               </div>
 
               <div className="formula-item">
@@ -87,7 +90,10 @@ export default function RepasAssis() {
                   <h3>Formule Entrée + Plat</h3>
                   <p>L'essentiel des saveurs salées traditionnelles algériennes.</p>
                 </div>
-                <div className="formula-price-tag">17€ <span className="price-unit">/ pers.</span></div>
+                <div className="formula-price-tag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
+                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
+                  <span>17€ <span className="price-unit">/ pers.</span></span>
+                </div>
               </div>
 
               <div className="formula-item featured">
@@ -95,7 +101,10 @@ export default function RepasAssis() {
                   <h3>Menu Complet</h3>
                   <p>Entrée + Plat + Dessert pour un voyage gustatif absolu.</p>
                 </div>
-                <div className="formula-price-tag">21€ <span className="price-unit">/ pers.</span></div>
+                <div className="formula-price-tag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
+                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
+                  <span>21€ <span className="price-unit">/ pers.</span></span>
+                </div>
               </div>
             </div>
 

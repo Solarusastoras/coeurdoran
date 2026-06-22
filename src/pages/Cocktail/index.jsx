@@ -39,7 +39,10 @@ export default function Cocktail() {
               <div className="buffet-formula-item" style={{ padding: '1.25rem', backgroundColor: 'var(--color-bordeaux-ultra-light)', borderRadius: 'var(--border-radius-md)', border: '1px solid transparent' }}>
                 <div className="bf-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-slate-dark)' }}>Formule 3 pièces</h3>
-                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-bordeaux)' }}>7,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
+                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-bordeaux)', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
+                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
+                    <span>7,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
+                  </span>
                 </div>
                 <p className="bf-desc" style={{ fontSize: '0.85rem', color: 'var(--color-slate-light)', lineHeight: 1.5 }}>3 pièces salées savoureuses.</p>
               </div>
@@ -47,7 +50,10 @@ export default function Cocktail() {
               <div className="buffet-formula-item" style={{ padding: '1.25rem', backgroundColor: 'var(--color-bordeaux-ultra-light)', borderRadius: 'var(--border-radius-md)', border: '1px solid transparent' }}>
                 <div className="bf-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-slate-dark)' }}>Formule 4 pièces</h3>
-                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-bordeaux)' }}>9,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
+                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-bordeaux)', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
+                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
+                    <span>9,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
+                  </span>
                 </div>
                 <p className="bf-desc" style={{ fontSize: '0.85rem', color: 'var(--color-slate-light)', lineHeight: 1.5 }}>3 pièces salées et 1 pièce sucrée au choix.</p>
               </div>
@@ -55,7 +61,10 @@ export default function Cocktail() {
               <div className="buffet-formula-item featured" style={{ padding: '1.25rem', backgroundColor: 'hsl(26, 93%, 97%)', borderRadius: 'var(--border-radius-md)', border: '1px solid var(--color-gold-light)', boxShadow: '0 4px 15px rgba(155, 88, 51, 0.08)' }}>
                 <div className="bf-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-gold-dark)' }}>Formule 5 pièces</h3>
-                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-gold)' }}>11,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
+                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-gold)', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
+                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 500 }}>À partir de</span>
+                    <span>11,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
+                  </span>
                 </div>
                 <p className="bf-desc" style={{ fontSize: '0.85rem', color: 'var(--color-slate-light)', lineHeight: 1.5 }}>4 pièces salées et 1 pièce sucrée au choix.</p>
               </div>
