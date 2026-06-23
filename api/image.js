@@ -3,7 +3,6 @@
  * Évite le blocage "Mixed Content" du navigateur.
  */
 
-import Jimp from 'jimp';
 
 const NAS_IP = '80.9.84.84';
 const NAS_PORT = 5001;
