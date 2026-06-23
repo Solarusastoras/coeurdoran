@@ -19,7 +19,7 @@
   --color-gold-light: hsl(21, 51%, 85%);
   --color-gold-dark: hsl(21, 51%, 30%);
 
-  --color-red: hsl(33, 92%, 38%);
+  --color-red: hsl(33, 92%, 34%);
   /* Accent color: Terracotta Orange #be5e0b (Higher contrast) */
   --color-red-light: hsl(33, 92%, 92%);
   --color-red-dark: hsl(33, 92%, 30%);
@@ -324,3 +324,10 @@ h4,
   height: 0.16em;
   background-color: currentColor;
 }
+
+/* Animation globale de chargement squelette */
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

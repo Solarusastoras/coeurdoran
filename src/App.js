@@ -78,80 +78,81 @@ export default function App() {
         )}
 
         {/* Loader de chargement initial */}
-        {isLoading ? (
-          <div className="loading-state" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '50vh', gap: '1rem' }}>
-            <Loader2 className="animate-spin" size={40} style={{ color: 'var(--color-bordeaux)' }} />
-            <p style={{ color: 'var(--color-slate-light)', fontWeight: 500 }}>Chargement de la carte depuis le NAS...</p>
-          </div>
-        ) : (
-          <Routes>
-            <Route path="/" element={
-              <>
-                <Hero onExplore={() => document.getElementById('menu-catalog')?.scrollIntoView({ behavior: 'smooth' })} />
-                <div className="container">
-                  <MenuCatalog menuItems={menuItems} />
-                </div>
-              </>
-            } />
-
-            <Route path="/repas-assis" element={
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero onExplore={() => document.getElementById('menu-catalog')?.scrollIntoView({ behavior: 'smooth' })} />
               <div className="container">
-                <RepasAssis />
+                <MenuCatalog menuItems={menuItems} isLoading={isLoading} />
               </div>
-            } />
+            </>
+          } />
 
-            <Route path="/buffet" element={
+          <Route path="/repas-assis" element={
+            <div className="container">
+              <RepasAssis />
+            </div>
+          } />
+
+          <Route path="/buffet" element={
+            <div className="container">
+              <Buffet />
+            </div>
+          } />
+
+          <Route path="/cocktail" element={
+            <div className="container">
+              <Cocktail />
+            </div>
+          } />
+
+          <Route path="/brunch" element={
+            <div className="container">
+              <Brunch />
+            </div>
+          } />
+
+          <Route path="/ateliers" element={
+            <div className="container">
+              <Workshops />
+            </div>
+          } />
+
+          <Route path="/histoire" element={
+            <NotreHistoire />
+          } />
+
+          <Route path="/booklet" element={
+            isAdmin ? (
               <div className="container">
-                <Buffet />
-              </div>
-            } />
-
-            <Route path="/cocktail" element={
-              <div className="container">
-                <Cocktail />
-              </div>
-            } />
-
-            <Route path="/brunch" element={
-              <div className="container">
-                <Brunch />
-              </div>
-            } />
-
-            <Route path="/ateliers" element={
-              <div className="container">
-                <Workshops />
-              </div>
-            } />
-
-            <Route path="/histoire" element={
-              <NotreHistoire />
-            } />
-
-            <Route path="/booklet" element={
-              isAdmin ? (
-                <div className="container">
+                {isLoading ? (
+                  <div className="loading-state" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '50vh', gap: '1rem' }}>
+                    <Loader2 className="animate-spin" size={40} style={{ color: 'var(--color-bordeaux)' }} />
+                    <p style={{ color: 'var(--color-slate-light)', fontWeight: 500 }}>Chargement du livret...</p>
+                  </div>
+                ) : (
                   <MenuBooklet menuItems={menuItems} />
-                </div>
-              ) : (
-                <Navigate to="/admin" replace />
-              )
-            } />
-
-            <Route path="/admin" element={
-              <div className="container">
-                <AdminPanel
-                  menuItems={menuItems}
-                  onRefresh={fetchMenu}
-                  isAdmin={isAdmin}
-                  setIsAdmin={setIsAdmin}
-                />
+                )}
               </div>
-            } />
+            ) : (
+              <Navigate to="/admin" replace />
+            )
+          } />
 
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        )}
+          <Route path="/admin" element={
+            <div className="container">
+              <AdminPanel
+                menuItems={menuItems}
+                onRefresh={fetchMenu}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+                isLoadingMenu={isLoading}
+              />
+            </div>
+          } />
+
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       {/* Pied de page informatif (Masqué à l'impression via CSS) */}

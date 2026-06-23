@@ -12,7 +12,7 @@ export default function Header({ isAdmin }) {
   return (
     <header className="header">
       <div className="header-container">
-        <NavLink to="/" className="header-logo" style={{ textDecoration: 'none' }}>
+        <NavLink to="/" className="header-logo" style={{ textDecoration: 'none' }} aria-label="Accueil - Traiteur Cœur d'Oran">
           <img src="/logo.svg" alt="Logo Traiteur Cœur d’Oran" className="header-logo-img" />
           <div className="logo-text">
             <h2> Cœur d’<span className="underlined-o">o</span>ran</h2>

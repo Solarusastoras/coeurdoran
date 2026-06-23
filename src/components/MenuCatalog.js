@@ -3,7 +3,7 @@ import { Search, Sparkles, AlertCircle, X } from 'lucide-react';
 import { getImageUrl } from '../utils/api';
 import './MenuCatalog.scss';
 
-export default function MenuCatalog({ menuItems }) {
+export default function MenuCatalog({ menuItems, isLoading }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeImage, setActiveImage] = useState(null);
