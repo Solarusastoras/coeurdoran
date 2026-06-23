@@ -2,7 +2,7 @@
   "name": "coeur-doran",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://coeurdoran.solarusweb.ovh",
+  "homepage": ".",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
