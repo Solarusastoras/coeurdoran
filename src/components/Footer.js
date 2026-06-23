@@ -2,6 +2,23 @@ import React from 'react';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import './Footer.scss';
 
+const FacebookIcon = ({ size = 18, className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
 const InstagramIcon = ({ size = 18, className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -78,6 +95,10 @@ export default function Footer() {
             <li>
               <TikTokIcon size={18} className="contact-icon" />
               <a href="https://www.tiktok.com/@coeur.doran33" target="_blank" rel="noopener noreferrer">Nous suivre sur TikTok</a>
+            </li>
+            <li>
+              <FacebookIcon size={18} className="contact-icon" />
+              <a href="https://www.facebook.com/profile.php?id=61568603632434" target="_blank" rel="noopener noreferrer">Nous suivre sur Facebook</a>
             </li>
           </ul>
         </div>

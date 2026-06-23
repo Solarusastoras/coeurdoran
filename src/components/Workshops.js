@@ -111,6 +111,30 @@ export default function Workshops() {
         ...prev,
         [formData.workshopId]: newSpots
       }));
+
+      // Générer le mailto pré-rempli pour envoyer les détails de la réservation
+      const workshopTitle = selectedWorkshopDetails?.title || 'Atelier';
+      const subject = `[Réservation Atelier] ${workshopTitle} - ${formData.firstName} ${formData.lastName}`;
+      const body = `Bonjour Djaouida,
+
+Une nouvelle demande d'inscription pour un atelier culinaire a été soumise :
+
+- Atelier : ${workshopTitle}
+- Nom : ${formData.lastName}
+- Prénom : ${formData.firstName}
+- Profil : ${formData.isCompany ? 'Entreprise' : 'Particulier'}
+- E-mail : ${formData.email}
+- Téléphone : ${formData.phone}
+- Places demandées : ${formData.participants}
+- Remarques / Notes : ${formData.notes || 'Aucune'}
+
+Merci de recontacter ce client pour confirmer et finaliser la réservation.`;
+
+      const mailtoUrl = `mailto:traiteurcoeurdoran@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      
+      // Déclencher le mailto
+      window.location.href = mailtoUrl;
+
       setIsSubmitted(true);
     } catch (err) {
       console.error(err);
@@ -271,7 +295,7 @@ export default function Workshops() {
                   <p className="price-total"><strong>Montant estimé :</strong> {selectedWorkshopDetails ? selectedWorkshopDetails.price * formData.participants : 0}€</p>
                 </div>
                 <p className="success-next-steps">
-                  Djaouida étudie votre demande et prendra contact avec vous par téléphone au <strong>{formData.phone}</strong> ou par email à <strong>{formData.email}</strong>.
+                  Un e-mail pré-rempli avec vos détails a été ouvert. Veuillez l'envoyer pour transmettre votre demande à <strong>traiteurcoeurdoran@gmail.com</strong>. Djaouida étudiera votre demande et vous recontactera par téléphone au <strong>{formData.phone}</strong>.
                 </p>
                 <button
                   className="btn btn-outline btn-block"
