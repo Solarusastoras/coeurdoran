@@ -3,6 +3,8 @@
  * Évite le blocage "Mixed Content" du navigateur.
  */
 
+import Jimp from 'jimp';
+
 const NAS_IP = '80.9.84.84';
 const NAS_PORT = 5001;
 
@@ -28,12 +30,26 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Image introuvable sur le NAS.' });
     }
 
-    const contentType = response.headers.get('content-type') || 'image/jpeg';
-    res.setHeader('Content-Type', contentType);
-    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache 24h
+    const rawBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(rawBuffer);
 
-    const buffer = await response.arrayBuffer();
-    res.send(Buffer.from(buffer));
+    // Optimiser l'image à la volée avec Jimp
+    const image = await Jimp.read(buffer);
+    
+    // Redimensionner si l'image est plus large que 800px (retina display pour les cartes de 419px)
+    if (image.bitmap.width > 800) {
+      image.resize(800, Jimp.AUTO);
+    }
+    
+    // Compresser avec une qualité de 75%
+    image.quality(75);
+    
+    // Obtenir le buffer de l'image optimisée au format JPEG
+    const optimizedBuffer = await image.getBufferAsync(Jimp.MIME_JPEG);
+
+    res.setHeader('Content-Type', 'image/jpeg');
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable'); // Cache 1 an
+    res.send(optimizedBuffer);
   } catch (error) {
     console.error('[Proxy Image] Erreur :', error.message);
     res.status(502).json({ error: 'Impossible de joindre le NAS.' });

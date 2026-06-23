@@ -169,78 +169,103 @@ Merci de recontacter ce client pour confirmer et finaliser la réservation.`;
           <p className="section-subtitle">Sélectionnez l'atelier de votre choix pour découvrir les secrets d'un repas fait maison.</p>
 
           <div className="workshops-grid">
-            {workshopsList.map((workshop) => {
-              const spotsLeft = getSpotsLeft(workshop.id);
-              const isComplet = spotsLeft === 0;
-
-              return (
-                <div key={workshop.id} className={`workshop-card ${isComplet ? 'is-complet' : ''}`}>
-                  <div className="workshop-card-header">
-                    <div className="header-title-row">
-                      <h3>{workshop.title}</h3>
-                      {isComplet && (
-                        <span className="badge-complet">Complet</span>
-                      )}
-                    </div>
-                    <div className="header-price-availability-row">
-                      <div className="workshop-price-tag">
-                        <span className="price-amount">{workshop.price}€</span>
-                        <span className="price-unit">/ pers</span>
-                      </div>
-                      <div className={`header-availability-badge ${isComplet ? 'out-of-stock' : 'in-stock'}`}>
-                        {isComplet ? (
-                          'Complet'
-                        ) : (
-                          <>
-                            <span className="badge-count">{spotsLeft} place{spotsLeft > 1 ? 's' : ''}</span>
-                            <span className="badge-label">disponible{spotsLeft > 1 ? 's' : ''}</span>
-                          </>
-                        )}
+            {isLoadingAvailability ? (
+              // Afficher 4 cartes squelettes pendant le chargement pour éviter le CLS (Cumulative Layout Shift)
+              Array(4).fill(0).map((_, idx) => (
+                <div key={idx} className="workshop-card is-skeleton">
+                  <div className="skeleton-shimmer-container">
+                    <div className="skeleton-header">
+                      <div className="skeleton-title"></div>
+                      <div className="skeleton-price-row">
+                        <div className="skeleton-price"></div>
+                        <div className="skeleton-badge"></div>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="workshop-card-body">
-                    <p className="workshop-desc">{workshop.description}</p>
-
-                    <div className="workshop-meta">
-                      <div className="meta-item">
-                        <Clock size={16} />
-                        <span>{workshop.duration}</span>
-                      </div>
-                      <div className="meta-item">
-                        <BookOpen size={16} />
-                        <span>{workshop.level}</span>
-                      </div>
+                    <div className="skeleton-body">
+                      <div className="skeleton-desc"></div>
+                      <div className="skeleton-meta"></div>
+                      <div className="skeleton-includes"></div>
                     </div>
-
-                    <div className="workshop-includes">
-                      <h4>Ce qui est inclus :</h4>
-                      <ul>
-                        {(workshop.includes || []).map((inc, index) => (
-                          <li key={index}>
-                            <Check size={14} className="check-icon" />
-                            <span>{inc}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="skeleton-footer">
+                      <div className="skeleton-button"></div>
                     </div>
-                  </div>
-
-                  <div className="workshop-card-footer">
-                    <button
-                      className={`btn btn-block ${isComplet ? 'btn-disabled' : 'btn-primary'}`}
-                      disabled={isComplet}
-                      onClick={() => {
-                        openModal(workshop.id);
-                      }}
-                    >
-                      {isComplet ? 'Complet' : 'Réserver cet Atelier'}
-                    </button>
                   </div>
                 </div>
-              );
-            })}
+              ))
+            ) : (
+              workshopsList.map((workshop) => {
+                const spotsLeft = getSpotsLeft(workshop.id);
+                const isComplet = spotsLeft === 0;
+
+                return (
+                  <div key={workshop.id} className={`workshop-card ${isComplet ? 'is-complet' : ''}`}>
+                    <div className="workshop-card-header">
+                      <div className="header-title-row">
+                        <h3>{workshop.title}</h3>
+                        {isComplet && (
+                          <span className="badge-complet">Complet</span>
+                        )}
+                      </div>
+                      <div className="header-price-availability-row">
+                        <div className="workshop-price-tag">
+                          <span className="price-amount">{workshop.price}€</span>
+                          <span className="price-unit">/ pers</span>
+                        </div>
+                        <div className={`header-availability-badge ${isComplet ? 'out-of-stock' : 'in-stock'}`}>
+                          {isComplet ? (
+                            'Complet'
+                          ) : (
+                            <>
+                              <span className="badge-count">{spotsLeft} place{spotsLeft > 1 ? 's' : ''}</span>
+                              <span className="badge-label">disponible{spotsLeft > 1 ? 's' : ''}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="workshop-card-body">
+                      <p className="workshop-desc">{workshop.description}</p>
+
+                      <div className="workshop-meta">
+                        <div className="meta-item">
+                          <Clock size={16} />
+                          <span>{workshop.duration}</span>
+                        </div>
+                        <div className="meta-item">
+                          <BookOpen size={16} />
+                          <span>{workshop.level}</span>
+                        </div>
+                      </div>
+
+                      <div className="workshop-includes">
+                        <h4>Ce qui est inclus :</h4>
+                        <ul>
+                          {(workshop.includes || []).map((inc, index) => (
+                            <li key={index}>
+                              <Check size={14} className="check-icon" />
+                              <span>{inc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="workshop-card-footer">
+                      <button
+                        className={`btn btn-block ${isComplet ? 'btn-disabled' : 'btn-primary'}`}
+                        disabled={isComplet}
+                        onClick={() => {
+                          openModal(workshop.id);
+                        }}
+                      >
+                        {isComplet ? 'Complet' : 'Réserver cet Atelier'}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
 
           {/* Section Informations Complémentaires */}
