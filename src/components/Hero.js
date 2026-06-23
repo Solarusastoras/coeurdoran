@@ -37,7 +37,7 @@ export default function Hero({ onExplore }) {
             <div className="feature-icon-wrapper">
               <Utensils className="feature-icon" size={24} />
             </div>
-            <h3>Repas Assis</h3>
+            <h2>Repas Assis</h2>
             <p>L'excellence d'un repas traditionnel servi à table pour toutes vos réceptions.</p>
             <div className="feature-card-footer">
               <span className="feature-discover">
@@ -51,7 +51,7 @@ export default function Hero({ onExplore }) {
             <div className="feature-icon-wrapper">
               <ChefHat className="feature-icon" size={24} />
             </div>
-            <h3>Buffets</h3>
+            <h2>Buffets</h2>
             <p>Buffets d'exception alliant présentation soignée, saveurs orientales et convivialité.</p>
             <div className="feature-card-footer">
               <span className="feature-discover">
@@ -65,7 +65,7 @@ export default function Hero({ onExplore }) {
             <div className="feature-icon-wrapper">
               <Wine className="feature-icon" size={24} />
             </div>
-            <h3>Cocktails</h3>
+            <h2>Cocktails</h2>
             <p>Cocktails dînatoires et pièces salées/sucrées raffinées pour toutes vos réceptions.</p>
             <div className="feature-card-footer">
               <span className="feature-discover">
@@ -79,7 +79,7 @@ export default function Hero({ onExplore }) {
             <div className="feature-icon-wrapper">
               <Coffee className="feature-icon" size={24} />
             </div>
-            <h3>Matinées & Brunchs</h3>
+            <h2>Matinées & Brunchs</h2>
             <p>Des formules matinales douces, épicées et conviviales pour vos lendemains de fêtes ou réunions.</p>
             <div className="feature-card-footer">
               <span className="feature-discover">
@@ -93,7 +93,7 @@ export default function Hero({ onExplore }) {
             <div className="feature-icon-wrapper">
               <Flame className="feature-icon" size={24} />
             </div>
-            <h3>Ateliers Culinaires</h3>
+            <h2>Ateliers Culinaires</h2>
             <p>Découvrez les secrets de la cuisine algérienne lors de cours et d'ateliers interactifs.</p>
             <div className="feature-card-footer">
               <span className="feature-discover">

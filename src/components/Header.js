@@ -25,6 +25,7 @@ export default function Header({ isAdmin }) {
             to="/"
             end
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            aria-label="La Carte"
           >
             <Sparkles size={18} />
             <span>La Carte</span>
@@ -34,29 +35,30 @@ export default function Header({ isAdmin }) {
             <NavLink
               to="/repas-assis"
               className={`nav-link dropdown-trigger ${isCateringActive ? 'active' : ''}`}
+              aria-label="Formules Traiteur"
             >
               <Utensils size={18} />
               <span>Formules Traiteur</span>
               <ChevronDown size={14} className="dropdown-chevron" />
             </NavLink>
             <div className="dropdown-menu">
-              <NavLink to="/repas-assis" className="dropdown-item">
+              <NavLink to="/repas-assis" className="dropdown-item" aria-label="Formule Repas Assis">
                 <Utensils size={16} />
                 <span>Repas Assis</span>
               </NavLink>
-              <NavLink to="/buffet" className="dropdown-item">
+              <NavLink to="/buffet" className="dropdown-item" aria-label="Formule Buffets">
                 <ChefHat size={16} />
                 <span>Buffets</span>
               </NavLink>
-              <NavLink to="/cocktail" className="dropdown-item">
+              <NavLink to="/cocktail" className="dropdown-item" aria-label="Formule Cocktails">
                 <Wine size={16} />
                 <span>Cocktails</span>
               </NavLink>
-              <NavLink to="/brunch" className="dropdown-item">
+              <NavLink to="/brunch" className="dropdown-item" aria-label="Formule Matinées et Brunchs">
                 <Coffee size={16} />
                 <span>Matinées & Brunchs</span>
               </NavLink>
-              <NavLink to="/ateliers" className="dropdown-item">
+              <NavLink to="/ateliers" className="dropdown-item" aria-label="Ateliers Culinaires">
                 <Flame size={16} />
                 <span>Ateliers Culinaires</span>
               </NavLink>
@@ -66,6 +68,7 @@ export default function Header({ isAdmin }) {
           <NavLink
             to="/histoire"
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            aria-label="Mon Histoire"
           >
             <BookHeart size={18} />
             <span>Mon Histoire</span>
@@ -75,6 +78,7 @@ export default function Header({ isAdmin }) {
             <NavLink
               to="/booklet"
               className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              aria-label="Créer un Fascicule"
             >
               <BookOpen size={18} />
               <span>Créer un Fascicule</span>
@@ -84,6 +88,7 @@ export default function Header({ isAdmin }) {
           <NavLink
             to="/admin"
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            aria-label={isAdmin ? 'Admin (Connecté)' : 'Espace Admin'}
           >
             <Settings2 size={18} />
             <span>{isAdmin ? 'Admin (Connecté)' : 'Espace Admin'}</span>

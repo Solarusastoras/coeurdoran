@@ -9,9 +9,9 @@
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
   /* Palette HSL Premium - Thème Personnalisé */
-  --color-bordeaux: hsl(65, 35%, 44%);
-  /* Dominant color: Olive green #8F9648 */
-  --color-bordeaux-light: hsl(65, 35%, 52%);
+  --color-bordeaux: hsl(65, 35%, 30%);
+  /* Dominant color: Olive green #5f652b (Higher contrast) */
+  --color-bordeaux-light: hsl(65, 35%, 38%);
   --color-bordeaux-ultra-light: hsl(65, 35%, 96%);
 
   --color-gold: hsl(21, 51%, 40%);
@@ -19,10 +19,10 @@
   --color-gold-light: hsl(21, 51%, 85%);
   --color-gold-dark: hsl(21, 51%, 30%);
 
-  --color-red: hsl(33, 92%, 54%);
-  /* Accent color: Orange #F6931C */
+  --color-red: hsl(33, 92%, 38%);
+  /* Accent color: Terracotta Orange #be5e0b (Higher contrast) */
   --color-red-light: hsl(33, 92%, 92%);
-  --color-red-dark: hsl(33, 92%, 40%);
+  --color-red-dark: hsl(33, 92%, 30%);
 
   --color-cream: hsl(26, 93%, 88%);
   /* Body background: Peach #FDDDC4 */
