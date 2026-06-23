@@ -1,83 +1,85 @@
-import React, { useState } from 'react';
-import { ChefHat, Clock, Users, BookOpen, Check, Calendar, Mail, Phone, Sparkles, Heart } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChefHat, Clock, BookOpen, Check, Calendar, Mail, Phone, Sparkles, Heart, X } from 'lucide-react';
+import { getWorkshops, updateWorkshopSpots } from '../utils/api';
 import './Workshops.scss';
 
 export default function Workshops() {
   const [formData, setFormData] = useState({
     workshopId: '',
-    name: '',
+    lastName: '',
+    firstName: '',
     email: '',
     phone: '',
-    date: '',
     participants: 1,
+    isCompany: false,
     notes: ''
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [availability, setAvailability] = useState({});
+  const [isLoadingAvailability, setIsLoadingAvailability] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const workshopsList = [
-    {
-      id: 'couscous',
-      title: "Couscous Traditionnel de Ma Mère",
-      duration: "3h30",
-      capacity: "6 à 8 personnes",
-      price: 75,
-      level: "Tous niveaux",
-      description: "Apprenez l'art ancestral de rouler le couscous à la main, la cuisson en trois étapes à la vapeur dans le couscoussier traditionnel, et la préparation d'un bouillon parfumé aux épices secrètes d'Oran.",
-      includes: [
-        "Ingrédients frais et bio de saison",
-        "Dégustation conviviale sur place",
-        "Un sachet d'épices d'Oran maison offert",
-        "Fiche recette illustrée envoyée par email"
-      ]
-    },
-    {
-      id: 'patisseries',
-      title: "Pâtisseries Orientales & Thé à la Menthe",
-      duration: "2h30",
-      capacity: "8 à 10 personnes",
-      price: 60,
-      level: "Amateur de douceurs",
-      description: "Maîtrisez le feuilletage et le pliage de la Baklawa, la confection des Cornes de Gazelle parfumées à la fleur d'oranger, et le rituel authentique du service du thé à la menthe algérien.",
-      includes: [
-        "Ingrédients premium (amandes, miel pur, eau de rose)",
-        "Boîte cadeau de vos réalisations (10-12 pièces)",
-        "Dégustation de thé sur place",
-        "Livret numérique des secrets de Djaouida"
-      ]
-    },
-    {
-      id: 'chorba',
-      title: "Chorba Frik & Boureks Croustillants",
-      duration: "2h00",
-      capacity: "6 à 8 personnes",
-      price: 50,
-      level: "Débutant & Familial",
-      description: "Un grand classique des tables de fête algériennes. Apprenez à mijoter la Chorba Frik traditionnelle au blé concassé et façonnez des boureks croustillants en cigares ou triangles.",
-      includes: [
-        "Tous les ingrédients inclus",
-        "Dégustation chaleureuse sur place",
-        "Technique infaillible de pliage des feuilles de dioul",
-        "Fiche recette imprimée"
-      ]
-    },
-    {
-      id: 'tajines',
-      title: "Atelier Prestige : Tajines & Pain Matlouh",
-      duration: "3h00",
-      capacity: "4 à 6 personnes",
-      price: 80,
-      level: "Passionnés de cuisine",
-      description: "Initiez-vous à la cuisson lente et harmonieuse en tajine de terre cuite (tajine d'agneau sucré-salé aux pruneaux et amandes grillées) et pétrissez le pain gonflé traditionnel cuit sur plaque en fonte.",
-      includes: [
-        "Ingrédients de qualité bouchère et épices rares",
-        "Repas complet partagé (entrée, plat, boisson)",
-        "Votre pain Matlouh chaud à emporter",
-        "Fiche technique de cuisson lente"
-      ]
+  const openModal = (workshopId) => {
+    setFormData({
+      workshopId: workshopId || '',
+      lastName: '',
+      firstName: '',
+      email: '',
+      phone: '',
+      participants: 1,
+      isCompany: false,
+      notes: ''
+    });
+    setIsSubmitted(false);
+    setError('');
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsSubmitted(false);
+    setFormData({
+      workshopId: '',
+      lastName: '',
+      firstName: '',
+      email: '',
+      phone: '',
+      participants: 1,
+      isCompany: false,
+      notes: ''
+    });
+  };
+
+  const [workshopsList, setWorkshopsList] = useState([]);
+
+  useEffect(() => {
+    const fetchAvailability = async () => {
+      try {
+        const data = await getWorkshops();
+        setWorkshopsList(data);
+        const map = {};
+        data.forEach(w => {
+          map[w.id] = w.availablePlaces;
+        });
+        setAvailability(map);
+      } catch (err) {
+        console.error("Erreur de chargement des places disponibles :", err);
+      } finally {
+        setIsLoadingAvailability(false);
+      }
+    };
+    fetchAvailability();
+  }, []);
+
+  const getSpotsLeft = (workshopId) => {
+    let spots = 8;
+    if (availability[workshopId] !== undefined) {
+      spots = availability[workshopId];
     }
-  ];
+    return Math.min(spots, 8);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -87,15 +89,33 @@ export default function Workshops() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.workshopId || !formData.name || !formData.email || !formData.phone || !formData.date) {
+    if (!formData.workshopId || !formData.lastName || !formData.firstName || !formData.email || !formData.phone) {
       setError('Veuillez remplir tous les champs obligatoires.');
       return;
     }
+
+    const spotsLeft = getSpotsLeft(formData.workshopId);
+    if (formData.participants > spotsLeft) {
+      setError(`Il ne reste que ${spotsLeft} place(s) disponible(s) pour cet atelier.`);
+      return;
+    }
+
     setError('');
-    setIsSubmitted(true);
-    // Dans une version de production, nous enverrions les données via API ou email
+
+    try {
+      const newSpots = spotsLeft - formData.participants;
+      await updateWorkshopSpots(formData.workshopId, newSpots);
+      setAvailability(prev => ({
+        ...prev,
+        [formData.workshopId]: newSpots
+      }));
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      setError('Erreur lors de la réservation. Veuillez réessayer.');
+    }
   };
 
   const selectedWorkshopDetails = workshopsList.find(w => w.id === formData.workshopId);
@@ -125,60 +145,78 @@ export default function Workshops() {
           <p className="section-subtitle">Sélectionnez l'atelier de votre choix pour découvrir les secrets d'un repas fait maison.</p>
 
           <div className="workshops-grid">
-            {workshopsList.map((workshop) => (
-              <div key={workshop.id} className="workshop-card">
-                <div className="workshop-card-header">
-                  <h3>{workshop.title}</h3>
-                  <div className="workshop-price-tag">
-                    <span className="price-amount">{workshop.price}€</span>
-                    <span className="price-unit">/ pers</span>
+            {workshopsList.map((workshop) => {
+              const spotsLeft = getSpotsLeft(workshop.id);
+              const isComplet = spotsLeft === 0;
+
+              return (
+                <div key={workshop.id} className={`workshop-card ${isComplet ? 'is-complet' : ''}`}>
+                  <div className="workshop-card-header">
+                    <div className="header-title-row">
+                      <h3>{workshop.title}</h3>
+                      {isComplet && (
+                        <span className="badge-complet">Complet</span>
+                      )}
+                    </div>
+                    <div className="header-price-availability-row">
+                      <div className="workshop-price-tag">
+                        <span className="price-amount">{workshop.price}€</span>
+                        <span className="price-unit">/ pers</span>
+                      </div>
+                      <div className={`header-availability-badge ${isComplet ? 'out-of-stock' : 'in-stock'}`}>
+                        {isComplet ? (
+                          'Complet'
+                        ) : (
+                          <>
+                            <span className="badge-count">{spotsLeft} place{spotsLeft > 1 ? 's' : ''}</span>
+                            <span className="badge-label">disponible{spotsLeft > 1 ? 's' : ''}</span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="workshop-card-body">
+                    <p className="workshop-desc">{workshop.description}</p>
+
+                    <div className="workshop-meta">
+                      <div className="meta-item">
+                        <Clock size={16} />
+                        <span>{workshop.duration}</span>
+                      </div>
+                      <div className="meta-item">
+                        <BookOpen size={16} />
+                        <span>{workshop.level}</span>
+                      </div>
+                    </div>
+
+                    <div className="workshop-includes">
+                      <h4>Ce qui est inclus :</h4>
+                      <ul>
+                        {(workshop.includes || []).map((inc, index) => (
+                          <li key={index}>
+                            <Check size={14} className="check-icon" />
+                            <span>{inc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="workshop-card-footer">
+                    <button
+                      className={`btn btn-block ${isComplet ? 'btn-disabled' : 'btn-primary'}`}
+                      disabled={isComplet}
+                      onClick={() => {
+                        openModal(workshop.id);
+                      }}
+                    >
+                      {isComplet ? 'Complet' : 'Réserver cet Atelier'}
+                    </button>
                   </div>
                 </div>
-
-                <div className="workshop-card-body">
-                  <p className="workshop-desc">{workshop.description}</p>
-
-                  <div className="workshop-meta">
-                    <div className="meta-item">
-                      <Clock size={16} />
-                      <span>{workshop.duration}</span>
-                    </div>
-                    <div className="meta-item">
-                      <Users size={16} />
-                      <span>{workshop.capacity}</span>
-                    </div>
-                    <div className="meta-item">
-                      <BookOpen size={16} />
-                      <span>{workshop.level}</span>
-                    </div>
-                  </div>
-
-                  <div className="workshop-includes">
-                    <h4>Ce qui est inclus :</h4>
-                    <ul>
-                      {workshop.includes.map((inc, index) => (
-                        <li key={index}>
-                          <Check size={14} className="check-icon" />
-                          <span>{inc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="workshop-card-footer">
-                  <button
-                    className="btn btn-primary btn-block"
-                    onClick={() => {
-                      setFormData({ ...formData, workshopId: workshop.id });
-                      document.getElementById('booking-form-section')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                  >
-                    Réserver cet Atelier
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Section Informations Complémentaires */}
@@ -207,9 +245,15 @@ export default function Workshops() {
           </div>
         </div>
 
-        {/* Formulaire de Réservation */}
-        <div className="booking-sidebar" id="booking-form-section">
-          <div className="booking-card">
+      </div>
+
+      {/* Modal de Réservation */}
+      {isModalOpen && (
+        <div className="booking-modal-overlay" onClick={closeModal}>
+          <div className="booking-modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={closeModal} aria-label="Fermer">
+              <X size={22} />
+            </button>
             <h3>Demande d'Inscription</h3>
             <p className="booking-intro">Choisissez votre cours et la date souhaitée. Djaouida vous recontactera sous 24h à 48h pour finaliser le paiement et valider votre réservation.</p>
 
@@ -219,10 +263,10 @@ export default function Workshops() {
                   <Heart size={32} className="heart-icon animate-pulse" />
                 </div>
                 <h4>Demande Reçue !</h4>
-                <p>Merci pour votre intérêt, <strong>{formData.name}</strong> !</p>
+                <p>Merci pour votre intérêt, <strong>{formData.firstName} {formData.lastName}</strong> !</p>
                 <div className="success-details">
                   <p><strong>Atelier choisi :</strong> {selectedWorkshopDetails?.title}</p>
-                  <p><strong>Date souhaitée :</strong> {new Date(formData.date).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  <p><strong>Profil :</strong> {formData.isCompany ? 'Entreprise / Professionnel' : 'Particulier'}</p>
                   <p><strong>Places :</strong> {formData.participants} {formData.participants > 1 ? 'personnes' : 'personne'}</p>
                   <p className="price-total"><strong>Montant estimé :</strong> {selectedWorkshopDetails ? selectedWorkshopDetails.price * formData.participants : 0}€</p>
                 </div>
@@ -231,20 +275,9 @@ export default function Workshops() {
                 </p>
                 <button
                   className="btn btn-outline btn-block"
-                  onClick={() => {
-                    setIsSubmitted(false);
-                    setFormData({
-                      workshopId: '',
-                      name: '',
-                      email: '',
-                      phone: '',
-                      date: '',
-                      participants: 1,
-                      notes: ''
-                    });
-                  }}
+                  onClick={closeModal}
                 >
-                  Faire une autre demande
+                  Fermer la fenêtre
                 </button>
               </div>
             ) : (
@@ -265,23 +298,66 @@ export default function Workshops() {
                     required
                   >
                     <option value="">-- Sélectionnez un cours --</option>
-                    {workshopsList.map(w => (
-                      <option key={w.id} value={w.id}>{w.title} ({w.price}€/pers)</option>
-                    ))}
+                    {workshopsList.map(w => {
+                      const spots = getSpotsLeft(w.id);
+                      return (
+                        <option key={w.id} value={w.id} disabled={spots === 0}>
+                          {w.title} ({w.price}€/pers) {spots === 0 ? ' - COMPLET' : ` (${spots} places dispo)`}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
 
+                <div className="form-group-row">
+                  <div className="form-group">
+                    <label htmlFor="lastName">Nom <span className="required">*</span></label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      placeholder="Nom"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="firstName">Prénom <span className="required">*</span></label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      placeholder="Prénom"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div className="form-group">
-                  <label htmlFor="name">Nom Complet <span className="required">*</span></label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Votre prénom et nom"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                  />
+                  <label>Profil du participant <span className="required">*</span></label>
+                  <div className="profile-radio-group">
+                    <label className="radio-label">
+                      <input
+                        type="radio"
+                        name="isCompany"
+                        checked={formData.isCompany === false}
+                        onChange={() => setFormData({ ...formData, isCompany: false })}
+                      />
+                      <span>Particulier</span>
+                    </label>
+                    <label className="radio-label">
+                      <input
+                        type="radio"
+                        name="isCompany"
+                        checked={formData.isCompany === true}
+                        onChange={() => setFormData({ ...formData, isCompany: true })}
+                      />
+                      <span>Entreprise</span>
+                    </label>
+                  </div>
                 </div>
 
                 <div className="form-group-row">
@@ -311,31 +387,18 @@ export default function Workshops() {
                   </div>
                 </div>
 
-                <div className="form-group-row">
-                  <div className="form-group">
-                    <label htmlFor="date">Date Souhaitée <span className="required">*</span></label>
-                    <input
-                      type="date"
-                      id="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="participants">Nombre de places <span className="required">*</span></label>
-                    <input
-                      type="number"
-                      id="participants"
-                      name="participants"
-                      min="1"
-                      max="12"
-                      value={formData.participants}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
+                <div className="form-group">
+                  <label htmlFor="participants">Nombre de places <span className="required">*</span></label>
+                  <input
+                    type="number"
+                    id="participants"
+                    name="participants"
+                    min="1"
+                    max={formData.workshopId ? getSpotsLeft(formData.workshopId) : 8}
+                    value={formData.participants}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </div>
 
                 <div className="form-group">
@@ -375,7 +438,7 @@ export default function Workshops() {
             )}
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

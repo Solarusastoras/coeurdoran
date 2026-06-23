@@ -564,3 +564,61 @@
     gap: 0.5rem;
   }
 }
+
+/* ==========================================
+   AJOUTS : NAVIGATION PAR ONGLETS & ATELIERS
+   ========================================== */
+
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 0px;
+}
+
+.admin-tab-btn {
+  background: none;
+  border: none;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-slate-light);
+  border-bottom: 3px solid transparent;
+  transition: var(--transition-smooth);
+  font-family: var(--font-sans);
+  margin-bottom: -2px;
+  
+  &:hover {
+    color: var(--color-bordeaux);
+  }
+  
+  &.active {
+    color: var(--color-bordeaux);
+    border-bottom: 3px solid var(--color-bordeaux);
+    font-weight: 700;
+  }
+}
+
+.workshops-admin-container {
+  animation: adminFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.workshops-admin-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@keyframes adminFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

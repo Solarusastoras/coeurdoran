@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Edit2, Trash2, Check, Lock, Unlock, Upload, AlertTriangle, Eye } from 'lucide-react';
-import { createMenuItem, updateMenuItem, deleteMenuItem, uploadImage, getImageUrl } from '../utils/api';
+import { Plus, Edit2, Trash2, Check, Lock, Unlock, Upload, AlertTriangle, Eye, Calendar } from 'lucide-react';
+import { 
+  createMenuItem, 
+  updateMenuItem, 
+  deleteMenuItem, 
+  uploadImage, 
+  getImageUrl, 
+  getWorkshops, 
+  createWorkshop, 
+  updateWorkshop, 
+  deleteWorkshop 
+} from '../utils/api';
 import './AdminPanel.scss';
 
 export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }) {
@@ -9,6 +19,24 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
   // Sécurité d'accès
   const [pinCode, setPinCode] = useState('');
   const [pinError, setPinError] = useState('');
+
+  // Gestion des onglets
+  const [activeTab, setActiveTab] = useState('menu'); // 'menu' ou 'workshops'
+
+  // État de gestion des ateliers
+  const [workshopsAvailability, setWorkshopsAvailability] = useState([]);
+  const [isLoadingWorkshops, setIsLoadingWorkshops] = useState(false);
+  const [workshopMessage, setWorkshopMessage] = useState({ text: '', type: '' });
+
+  // Formulaire d'édition / ajout d'ateliers
+  const [editingWorkshop, setEditingWorkshop] = useState(null); // null = mode ajout
+  const [wTitle, setWTitle] = useState('');
+  const [wPrice, setWPrice] = useState('');
+  const [wDuration, setWDuration] = useState('');
+  const [wLevel, setWLevel] = useState('Tous niveaux / Débutant');
+  const [wAvailablePlaces, setWAvailablePlaces] = useState(8);
+  const [wDescription, setWDescription] = useState('');
+  const [wIncludesText, setWIncludesText] = useState('');
 
   // Formulaire d'édition / ajout
   const [editingItem, setEditingItem] = useState(null); // null = mode ajout, sinon contient l'objet complet
@@ -25,6 +53,24 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
   const [message, setMessage] = useState({ text: '', type: '' }); // type: success / error
   const [tagInput, setTagInput] = useState('');
   const [allergenInput, setAllergenInput] = useState('');
+
+  const fetchWorkshops = async () => {
+    setIsLoadingWorkshops(true);
+    try {
+      const data = await getWorkshops();
+      setWorkshopsAvailability(data);
+    } catch (err) {
+      console.error("Erreur de chargement des ateliers :", err);
+    } finally {
+      setIsLoadingWorkshops(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isAdmin) {
+      fetchWorkshops();
+    }
+  }, [isAdmin]);
 
   // Liste des tags/allergènes courants pour sélection rapide
   const suggestedTags = ['Spécialité', 'Chef\'s Special', 'Local', 'Végétarien', 'Sans Gluten', 'Chaud', 'Froid', 'Poisson', 'Signature'];
@@ -178,7 +224,99 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
     return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
   };
 
+  const handleWorkshopEditClick = (workshop) => {
+    setEditingWorkshop(workshop);
+    setWTitle(workshop.title || '');
+    setWPrice(workshop.price ? workshop.price.toString() : '');
+    setWDuration(workshop.duration || '');
+    setWLevel(workshop.level || 'Tous niveaux / Débutant');
+    setWAvailablePlaces(workshop.availablePlaces !== undefined ? workshop.availablePlaces : 8);
+    setWDescription(workshop.description || '');
+    setWIncludesText(workshop.includes ? workshop.includes.join('\n') : '');
+    setWorkshopMessage({ text: '', type: '' });
+    
+    // Scroll vers le formulaire
+    document.getElementById('admin-workshop-form-anchor')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
+  const resetWorkshopForm = () => {
+    setEditingWorkshop(null);
+    setWTitle('');
+    setWPrice('');
+    setWDuration('');
+    setWLevel('Tous niveaux / Débutant');
+    setWAvailablePlaces(8);
+    setWDescription('');
+    setWIncludesText('');
+    setWorkshopMessage({ text: '', type: '' });
+  };
+
+  const handleWorkshopFormSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!wTitle.trim() || !wPrice || isNaN(parseFloat(wPrice)) || !wDuration.trim() || !wLevel.trim()) {
+      setWorkshopMessage({ text: 'Veuillez remplir tous les champs obligatoires.', type: 'error' });
+      return;
+    }
+
+    const priceNum = parseFloat(wPrice);
+    const spotsNum = Math.min(Math.max(parseInt(wAvailablePlaces, 10) || 0, 0), 8);
+    const includesArray = wIncludesText.split('\n').map(line => line.trim()).filter(Boolean);
+
+    let workshopId = editingWorkshop?.id;
+    if (!workshopId) {
+      workshopId = wTitle.toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove accents
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+      
+      if (workshopsAvailability.some(w => w.id === workshopId)) {
+        workshopId = `${workshopId}-${Date.now()}`;
+      }
+    }
+
+    const workshopData = {
+      id: workshopId,
+      title: wTitle.trim(),
+      price: priceNum,
+      duration: wDuration.trim(),
+      level: wLevel.trim(),
+      availablePlaces: spotsNum,
+      description: wDescription.trim(),
+      includes: includesArray
+    };
+
+    try {
+      if (editingWorkshop) {
+        await updateWorkshop(workshopId, workshopData);
+        setWorkshopMessage({ text: `L'atelier "${wTitle}" a été modifié avec succès sur le NAS.`, type: 'success' });
+      } else {
+        await createWorkshop(workshopData);
+        setWorkshopMessage({ text: `L'atelier "${wTitle}" a été créé avec succès sur le NAS.`, type: 'success' });
+      }
+      resetWorkshopForm();
+      fetchWorkshops();
+    } catch (error) {
+      console.error(error);
+      setWorkshopMessage({ text: error.message || 'Erreur lors de la sauvegarde.', type: 'error' });
+    }
+  };
+
+  const handleWorkshopDeleteClick = async (workshop) => {
+    if (window.confirm(`Êtes-vous sûr de vouloir supprimer l'atelier "${workshop.title}" ? Cette action est irréversible sur votre NAS.`)) {
+      try {
+        await deleteWorkshop(workshop.id);
+        setWorkshopMessage({ text: `L'atelier "${workshop.title}" a été supprimé du NAS.`, type: 'success' });
+        if (editingWorkshop && editingWorkshop.id === workshop.id) {
+          resetWorkshopForm();
+        }
+        fetchWorkshops();
+      } catch (error) {
+        console.error(error);
+        setWorkshopMessage({ text: error.message || 'Erreur lors de la suppression.', type: 'error' });
+      }
+    }
+  };
 
   // --- 1. Rendu Écran de Connexion (Verrouillé) ---
   if (!isAdmin) {
@@ -218,8 +356,14 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
     <section className="admin-section">
       <div className="admin-header-row">
         <div>
-          <h2 className="section-title">Gestion de la Carte Traiteur</h2>
-          <p className="section-subtitle">Interface d'administration synchronisée en direct avec votre stockage NAS.</p>
+          <h2 className="section-title">
+            {activeTab === 'menu' ? 'Gestion de la Carte Traiteur' : 'Gestion des Ateliers Culinaires'}
+          </h2>
+          <p className="section-subtitle">
+            {activeTab === 'menu'
+              ? "Interface d'administration synchronisée en direct avec votre stockage NAS."
+              : "Interface de gestion des disponibilités des places pour vos ateliers de cuisine."}
+          </p>
         </div>
         <button className="btn btn-outline" onClick={() => { setIsAdmin(false); navigate('/'); }}>
           <Lock size={16} />
@@ -227,12 +371,210 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
         </button>
       </div>
 
-      {message.text && (
-        <div className={`admin-alert ${message.type === 'success' ? 'alert-success' : 'alert-error'}`}>
-          {message.type === 'success' ? <Check size={18} /> : <AlertTriangle size={18} />}
-          <span>{message.text}</span>
+      <div className="admin-tabs">
+        <button
+          className={`admin-tab-btn ${activeTab === 'menu' ? 'active' : ''}`}
+          onClick={() => setActiveTab('menu')}
+        >
+          Carte Traiteur
+        </button>
+        <button
+          className={`admin-tab-btn ${activeTab === 'workshops' ? 'active' : ''}`}
+          onClick={() => setActiveTab('workshops')}
+        >
+          Ateliers Culinaires
+        </button>
+      </div>
+
+      {activeTab === 'workshops' ? (
+        <div className="workshops-admin-container" id="admin-workshop-form-anchor">
+          {workshopMessage.text && (
+            <div className={`admin-alert ${workshopMessage.type === 'success' ? 'alert-success' : 'alert-error'}`}>
+              {workshopMessage.type === 'success' ? <Check size={18} /> : <AlertTriangle size={18} />}
+              <span>{workshopMessage.text}</span>
+            </div>
+          )}
+
+          <div className="admin-grid">
+            {/* Formulaire Workshop */}
+            <div className="admin-form-card">
+              <h3>{editingWorkshop ? 'Modifier l\'atelier' : 'Ajouter un nouvel atelier'}</h3>
+              <p className="form-helper">
+                {editingWorkshop ? `Modification de : ${editingWorkshop.title}` : 'Remplissez le formulaire ci-dessous pour ajouter un cours.'}
+              </p>
+
+              <form onSubmit={handleWorkshopFormSubmit} className="admin-form">
+                <div className="form-row">
+                  <label>
+                    Titre de l'atelier *
+                    <input 
+                      type="text" 
+                      value={wTitle} 
+                      onChange={(e) => setWTitle(e.target.value)} 
+                      placeholder="Ex: Couscous Traditionnel" 
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="form-row split-row">
+                  <label>
+                    Prix (€) *
+                    <input 
+                      type="number" 
+                      value={wPrice} 
+                      onChange={(e) => setWPrice(e.target.value)} 
+                      placeholder="Ex: 75" 
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    Durée (ex: 3h30) *
+                    <input 
+                      type="text" 
+                      value={wDuration} 
+                      onChange={(e) => setWDuration(e.target.value)} 
+                      placeholder="Ex: 3h00" 
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="form-row split-row">
+                  <label>
+                    Niveau *
+                    <input 
+                      type="text" 
+                      value={wLevel} 
+                      onChange={(e) => setWLevel(e.target.value)} 
+                      placeholder="Ex: Tous niveaux / Débutant" 
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    Places disponibles (max 8) *
+                    <input 
+                      type="number" 
+                      min="0"
+                      max="8"
+                      value={wAvailablePlaces} 
+                      onChange={(e) => setWAvailablePlaces(e.target.value)} 
+                      placeholder="Ex: 8" 
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="form-row">
+                  <label>
+                    Description du cours *
+                    <textarea 
+                      value={wDescription} 
+                      onChange={(e) => setWDescription(e.target.value)} 
+                      placeholder="Détails du déroulement du cours, techniques enseignées..."
+                      rows={3}
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="form-row">
+                  <label>
+                    Ce qui est inclus (une ligne par élément)
+                    <textarea 
+                      value={wIncludesText} 
+                      onChange={(e) => setWIncludesText(e.target.value)} 
+                      placeholder="Ex: Ingrédients bio de saison&#10;Dégustation sur place&#10;Fiche recette envoyée par e-mail"
+                      rows={4}
+                    />
+                  </label>
+                </div>
+
+                <div className="form-actions">
+                  <button type="submit" className="btn btn-primary">
+                    {editingWorkshop ? <Check size={16} /> : <Plus size={16} />}
+                    {editingWorkshop ? 'Enregistrer les modifications' : 'Créer l\'atelier'}
+                  </button>
+                  
+                  {(editingWorkshop || wTitle || wPrice || wDuration || wDescription || wIncludesText) && (
+                    <button type="button" className="btn btn-outline" onClick={resetWorkshopForm}>
+                      Annuler
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
+
+            {/* Liste des Ateliers */}
+            <div className="admin-list-card">
+              <div className="list-card-header">
+                <h3>Ateliers enregistrés ({workshopsAvailability.length})</h3>
+                <span className="list-subtitle">Stocké sur le NAS / localStorage</span>
+              </div>
+
+              {isLoadingWorkshops ? (
+                <div className="admin-loading-state" style={{ padding: '2rem', textAlign: 'center' }}>
+                  <span>Chargement des ateliers...</span>
+                </div>
+              ) : (
+                <div className="table-responsive">
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Atelier / Informations</th>
+                        <th>Durée</th>
+                        <th>Prix</th>
+                        <th>Places</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {workshopsAvailability.map(w => (
+                        <tr key={w.id}>
+                          <td className="table-td-info">
+                            <div className="table-item-name">{w.title || w.id}</div>
+                            <div className="table-item-desc" style={{ WebkitLineClamp: 2 }}>{w.description}</div>
+                          </td>
+                          <td>{w.duration}</td>
+                          <td className="table-item-price">{w.price}€</td>
+                          <td style={{ fontWeight: 'bold', color: w.availablePlaces === 0 ? 'var(--color-error)' : 'var(--color-success)' }}>
+                            {w.availablePlaces} / 8
+                          </td>
+                          <td className="table-actions-cell">
+                            <button 
+                              className="btn-action btn-edit" 
+                              onClick={() => handleWorkshopEditClick(w)}
+                              title="Modifier cet atelier"
+                            >
+                              <Edit2 size={14} />
+                            </button>
+                            <button 
+                              className="btn-action btn-delete" 
+                              onClick={() => handleWorkshopDeleteClick(w)}
+                              title="Supprimer cet atelier"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      )}
+      ) : (
+        <>
+          {message.text && (
+            <div className={`admin-alert ${message.type === 'success' ? 'alert-success' : 'alert-error'}`}>
+              {message.type === 'success' ? <Check size={18} /> : <AlertTriangle size={18} />}
+              <span>{message.text}</span>
+            </div>
+          )}
 
       <div className="admin-grid" id="admin-form-anchor">
         {/* Formulaire (Ajout / Modification) */}
@@ -470,6 +812,8 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
           </div>
         </div>
       </div>
+      </>
+      )}
     </section>
   );
 }
