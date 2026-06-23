@@ -20,24 +20,6 @@
           "value": "public, max-age=86400, must-revalidate"
         }
       ]
-    },
-    {
-      "source": "/favicon.ico",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/robots.txt",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, must-revalidate"
-        }
-      ]
     }
   ],
   "rewrites": [
@@ -46,7 +28,7 @@
       "destination": "/api/:path*"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!static|api|data|uploads|favicon\\.ico|robots\\.txt|logo|manifest).*)",
       "destination": "/index.html"
     }
   ]
