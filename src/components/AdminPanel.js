@@ -45,6 +45,7 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('plat');
   const [image, setImage] = useState('');
+  const [localPreview, setLocalPreview] = useState(''); // aperçu local avant upload NAS
   const [tags, setTags] = useState([]);
   const [allergens, setAllergens] = useState([]);
   
@@ -94,6 +95,8 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
     setPrice(item.price.toString());
     setCategory(item.category);
     setImage(item.image);
+    if (localPreview) { URL.revokeObjectURL(localPreview); }
+    setLocalPreview(''); // réinitialiser l'aperçu local
     setTags(item.tags || []);
     setAllergens(item.allergens || []);
     setMessage({ text: '', type: '' });
@@ -109,6 +112,8 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
     setPrice('');
     setCategory('plat');
     setImage('');
+    if (localPreview) { URL.revokeObjectURL(localPreview); }
+    setLocalPreview('');
     setTags([]);
     setAllergens([]);
     setTagInput('');
@@ -120,6 +125,11 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
     const file = e.target.files[0];
     if (!file) return;
 
+    // Aperçu local immédiat (ne dépend pas du NAS)
+    if (localPreview) URL.revokeObjectURL(localPreview);
+    const objectUrl = URL.createObjectURL(file);
+    setLocalPreview(objectUrl);
+
     setIsUploading(true);
     setMessage({ text: '', type: '' });
     
@@ -129,7 +139,8 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
       setMessage({ text: 'Image téléchargée avec succès sur le NAS.', type: 'success' });
     } catch (error) {
       console.error(error);
-      setMessage({ text: error.message || 'Erreur lors de l\'upload de l\'image.', type: 'error' });
+      // Garder le preview local même si l'upload NAS échoue
+      setMessage({ text: (error.message || 'Erreur upload NAS.') + ' L\'aperçu local est disponible.', type: 'error' });
     } finally {
       setIsUploading(false);
     }
@@ -652,11 +663,25 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
                 <span className="upload-tip">Format JPG/PNG/WebP, max 5Mo</span>
               </div>
 
-              {image && (
+              {(localPreview || image) && (
                 <div className="form-image-preview">
-                  <img src={getImageUrl(image)} alt="Aperçu" className="preview-thumbnail" />
+                  <img
+                    src={localPreview || getImageUrl(image)}
+                    alt="Aperçu"
+                    className="preview-thumbnail"
+                    onError={(e) => {
+                      // Si le localPreview fonctionne pas, essayer l'URL NAS
+                      if (e.target.src === localPreview && image) {
+                        e.target.src = getImageUrl(image);
+                      }
+                    }}
+                  />
                   <div className="preview-overlay">
-                    <button type="button" className="btn-remove-img" onClick={() => setImage('')}>Supprimer la photo</button>
+                    <button type="button" className="btn-remove-img" onClick={() => {
+                      setImage('');
+                      if (localPreview) { URL.revokeObjectURL(localPreview); }
+                      setLocalPreview('');
+                    }}>Supprimer la photo</button>
                   </div>
                 </div>
               )}
