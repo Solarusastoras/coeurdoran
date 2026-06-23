@@ -349,6 +349,7 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
               onChange={(e) => setPinCode(e.target.value)}
               className="lock-input"
               maxLength={6}
+              autoComplete="current-password"
               autoFocus
             />
             {pinError && <p className="lock-error">{pinError}</p>}
