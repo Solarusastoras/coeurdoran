@@ -1,13 +1,31 @@
+/* ==========================================================================
+   PRESTATION - BRUNCH (Thème : "Le Patio d'Oran")
+   Style : Mise en page asymétrique, panneau arche fixe, zellige et assiettes de patio.
+   ========================================================================== */
+
 .brunch-page {
-  padding: 2rem 0 4rem;
+  padding: 2rem 1.5rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.page-header-nav {
-  margin-bottom: 2rem;
-  padding: 0 1.5rem;
+.brunch-asymmetric-wrapper {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
 
+/* --- COLONNE GAUCHE - PANNEAU FIXE EN ARCHE --- */
+.brunch-left-panel {
+  position: sticky;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.page-header-nav {
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -25,124 +43,223 @@
   }
 }
 
-.prestation-hero {
-  background: linear-gradient(135deg, hsl(65, 35%, 15%) 0%, hsl(21, 51%, 20%) 100%);
-  color: white;
-  padding: 4rem 2rem;
-  border-radius: var(--border-radius-lg);
-  margin-bottom: 3rem;
+.patio-arch-card {
+  /* Fond crème avec motif Zellige */
+  background-color: var(--color-bordeaux-ultra-light);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 0 L30 10 L20 20 L10 10 Z M20 20 L30 30 L20 40 L10 30 Z M0 20 L10 10 L20 20 L10 30 Z M20 20 L30 10 L40 20 L30 30 Z' fill='none' stroke='rgba(155, 88, 51, 0.04)' stroke-width='1'/%3E%3C/svg%3E");
+  border: 1px solid var(--color-border);
+  /* Arche en fer à cheval (Horseshoe Arch) prononcée */
+  border-radius: 180px 180px var(--border-radius-lg) var(--border-radius-lg);
+  padding: 5rem 2.25rem 3.5rem;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 4px solid var(--color-gold);
   box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 4px solid var(--color-gold);
 
   .prestation-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.08);
+    gap: 0.4rem;
+    background-color: rgba(155, 88, 51, 0.08);
     border: 1px solid var(--color-gold-light);
     padding: 0.4rem 1rem;
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: var(--color-gold-light);
-    margin-bottom: 1.5rem;
+    color: var(--color-gold-dark);
+    font-weight: 700;
   }
 
   h1 {
     font-family: var(--font-serif);
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    font-size: 2.2rem;
+    color: var(--color-bordeaux);
+    line-height: 1.25;
+    margin-bottom: 0.25rem;
   }
 
   .prestation-tagline {
-    font-size: 1.15rem;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 700px;
-    margin: 0 auto;
-    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--color-slate-light);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .patio-illustration {
+    margin-top: 1rem;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px dashed var(--color-gold-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+
+    .patio-logo-img {
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+    }
   }
 }
 
-.prestation-container {
-  padding: 0 1.5rem;
+/* --- COLONNE DROITE - CONTENU DEFILANT --- */
+.brunch-right-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
 }
 
-.prestation-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 2.5rem;
-  margin-bottom: 4rem;
-  align-items: start;
-}
-
-.prestation-details-card {
-  background: white;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  padding: 2.5rem;
-  box-shadow: var(--shadow-soft);
-
-  .details-header {
-    margin-bottom: 2rem;
+.brunch-section {
+  .section-header {
+    margin-bottom: 1.75rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-bottom: 1rem;
+    padding-bottom: 0.75rem;
 
     h2 {
       font-family: var(--font-serif);
       font-size: 1.8rem;
-      color: var(--color-bordeaux);
-      margin-bottom: 0.5rem;
+      color: var(--color-gold-dark);
+      margin-bottom: 0.25rem;
     }
 
     p {
       color: var(--color-slate-light);
       font-size: 0.95rem;
     }
+
+    /* Titre orné pour les spécialités */
+    .sparkle-icon {
+      color: var(--color-red);
+      margin-bottom: 0.5rem;
+    }
   }
 }
 
-.prestation-formulas-card {
+/* Liste des formules */
+.formulas-vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.brunch-formula-item {
+  padding: 1.5rem;
   background: white;
+  border-radius: var(--border-radius-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  padding: 2.5rem 2rem;
+  transition: var(--transition-smooth);
   box-shadow: var(--shadow-soft);
 
-  .formulas-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--color-gold);
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-bottom: 1rem;
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-gold);
+    box-shadow: 0 10px 25px rgba(155, 88, 51, 0.06);
+  }
 
-    h2 {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
+  .bf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--color-slate-dark);
     }
 
-    .sparkle-icon {
-      color: var(--color-gold);
+    .bf-price {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-red);
+      background-color: var(--color-red-light);
+      padding: 0.25rem 0.85rem;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .bf-desc {
+    font-size: 0.9rem;
+    color: var(--color-slate-light);
+    line-height: 1.55;
+  }
+
+  /* Formule vedette */
+  &.featured {
+    background-color: hsl(26, 93%, 97%);
+    border: 1px solid var(--color-gold-light);
+    border-left: 5px solid var(--color-red);
+
+    &:hover {
+      background-color: hsl(26, 93%, 95%);
+    }
+
+    .bf-header {
+      h3 {
+        color: var(--color-gold-dark);
+      }
+
+      .bf-price {
+        background-color: var(--color-red);
+        color: white;
+      }
     }
   }
 }
 
-.cta-box {
-  background-color: var(--color-cream);
+/* Assiettes de patio en quinconce */
+.patio-plates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.patio-plate-card {
+  background: white;
   border: 1px solid var(--color-border);
-  padding: 1.5rem;
-  border-radius: var(--border-radius-md);
+  /* Haut de carte arrondi en arche de patio */
+  border-radius: 80px 80px var(--border-radius-md) var(--border-radius-md);
+  padding: 2.5rem 1.5rem 1.75rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-gold-light);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .plate-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-gold);
+    border: 1px solid var(--color-gold-light);
+    padding: 0.15rem 0.5rem;
+    border-radius: 30px;
+    margin-bottom: 0.75rem;
+    background-color: var(--color-bordeaux-ultra-light);
+  }
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-bordeaux);
+    margin-bottom: 0.5rem;
+  }
 
   p {
     font-size: 0.85rem;
@@ -151,42 +268,34 @@
   }
 }
 
-.prestation-info-banner {
-  background: linear-gradient(135deg, hsl(65, 35%, 12%) 0%, hsl(21, 51%, 18%) 100%);
+/* Bloc Info & Devis */
+.brunch-footer-card {
+  background: linear-gradient(135deg, hsl(65, 35%, 15%) 0%, hsl(21, 51%, 20%) 100%);
   color: white;
   border-radius: var(--border-radius-lg);
   padding: 3rem;
-  display: grid;
-  grid-template-columns: 1.4fr 0.6fr;
-  gap: 3rem;
-  align-items: center;
   box-shadow: var(--shadow-heavy);
-  border-bottom: 4px solid var(--color-gold);
+  border-bottom: 5px solid var(--color-gold);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 
-  .info-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-
-    h3 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      line-height: 1.3;
-      color: white;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.8);
-    }
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
   }
 
-  .info-badges {
+  p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .brunch-info-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 
     span {
       background-color: rgba(255, 255, 255, 0.08);
@@ -199,65 +308,28 @@
     }
   }
 
-  .info-illustration {
-    display: flex;
-    justify-content: center;
-  }
+  .cta-action {
+    margin-top: 0.5rem;
 
-  .circle-image-wrapper {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    border: 3px solid var(--color-gold);
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    background-color: var(--color-bordeaux);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .circular-img {
-      width: 90%;
-      height: 90%;
-      object-fit: cover;
+    .btn {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
     }
   }
 }
 
-/* Responsive styles */
-@media (max-width: 992px) {
-  .prestation-grid {
+/* --- RESPONSIVE STYLE --- */
+@media (max-width: 900px) {
+  .brunch-asymmetric-wrapper {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
   }
 
-  .prestation-info-banner {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 2.5rem 2rem;
-
-    .info-illustration {
-      order: -1;
-    }
+  .brunch-left-panel {
+    position: static;
   }
 
-  .prestation-hero {
-    h1 {
-      font-size: 2.2rem;
-    }
-
-    padding: 3rem 1.5rem;
-  }
-}
-
-@media (max-width: 640px) {
-
-  .prestation-details-card,
-  .prestation-formulas-card {
-    padding: 1.5rem;
-  }
-
-  .prestation-hero h1 {
-    font-size: 1.8rem;
+  .patio-arch-card {
+    border-radius: 120px 120px var(--border-radius-lg) var(--border-radius-lg);
+    padding: 3.5rem 2rem 2.5rem;
   }
 }

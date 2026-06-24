@@ -1,12 +1,16 @@
+/* ==========================================================================
+   PRESTATION - REPAS ASSIS (Thème : "Le Grand Palais")
+   Style : Parchemin de mariage centré, double liseré doré, menu vertical.
+   ========================================================================== */
+
 .repas-assis-page {
-  padding: 2rem 0 4rem;
+  padding: 2rem 1.5rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .page-header-nav {
   margin-bottom: 2rem;
-  padding: 0 1.5rem;
 
   .back-link {
     display: inline-flex;
@@ -25,216 +29,197 @@
   }
 }
 
-.prestation-hero {
-  background: linear-gradient(135deg, hsl(65, 35%, 15%) 0%, hsl(21, 51%, 20%) 100%);
-  color: white;
-  padding: 4rem 2rem;
-  border-radius: var(--border-radius-lg);
-  margin-bottom: 3rem;
+/* --- LE PARCHEMIN DE BANQUET CENTRÉ --- */
+.repas-assis-parchment-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.repas-assis-parchment {
+  background-color: hsl(40, 30%, 97%); /* Teinte vieux papier/parchemin */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255,255,255,0.4) 0px, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='none' stroke='rgba(155, 88, 51, 0.02)' stroke-width='0.75'/%3E%3C/svg%3E");
+  max-width: 760px;
+  width: 100%;
+  border: 5px double var(--color-gold); /* Cadre classique or */
+  border-radius: var(--border-radius-sm);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-heavy), 0 25px 50px -12px rgba(155, 88, 51, 0.12);
+  position: relative;
+}
+
+/* Bordure fine interne créant un cadre */
+.parchment-inner-border {
+  border: 1px solid rgba(155, 88, 51, 0.2);
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
   text-align: center;
   position: relative;
-  overflow: hidden;
-  border-bottom: 4px solid var(--color-gold);
-  box-shadow: var(--shadow-soft);
 
-  .prestation-badge {
+  /* Ornements d'angles traditionnels */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px solid rgba(155, 88, 51, 0.1);
+    pointer-events: none;
+  }
+}
+
+/* En-tête */
+.parchment-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .palace-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--color-gold-light);
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
+    gap: 0.4rem;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold-dark);
+    padding: 0.35rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: var(--color-gold-light);
-    margin-bottom: 1.5rem;
+    font-weight: 600;
   }
 
   h1 {
     font-family: var(--font-serif);
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
+    font-size: 2.6rem;
+    color: var(--color-bordeaux); /* Vert Olive dominant */
+    letter-spacing: 0.5px;
     line-height: 1.2;
   }
 
-  .prestation-tagline {
-    font-size: 1.15rem;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 700px;
-    margin: 0 auto;
-    font-weight: 300;
+  .parchment-tagline {
+    font-size: 1rem;
+    color: var(--color-slate-light);
+    font-style: italic;
+    max-width: 450px;
+  }
+
+  .royal-separator {
+    color: var(--color-gold);
+    font-size: 1.3rem;
+    letter-spacing: 6px;
+    margin-top: 0.5rem;
   }
 }
 
-.prestation-container {
-  padding: 0 1.5rem;
-}
-
-.prestation-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 2.5rem;
-  margin-bottom: 4rem;
-  align-items: start;
-}
-
-.prestation-details-card {
-  background: white;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  padding: 2.5rem;
-  box-shadow: var(--shadow-soft);
-
-  .details-header {
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-bottom: 1rem;
-
-    h2 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      color: var(--color-bordeaux);
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--color-slate-light);
-      font-size: 0.95rem;
-    }
-  }
-}
-
-.menu-sections-wrapper {
+/* Suite des plats vertical */
+.parchment-menu-sequence {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2.25rem;
+  align-items: center;
 }
 
-.menu-section-item {
-  border-left: 3px solid var(--color-gold-light);
-  padding-left: 1.25rem;
+.parchment-course-section {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
 
-  .item-title-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px dashed var(--color-border);
-    padding-bottom: 0.25rem;
-
-    h3 {
-      font-size: 1.15rem;
-      color: var(--color-slate-dark);
-      font-family: var(--font-sans);
-      font-weight: 700;
-    }
-
-    .item-price {
-      font-family: var(--font-serif);
-      font-weight: 700;
-      color: var(--color-gold-dark);
-      font-size: 1.2rem;
-    }
+  .course-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-gold);
+    font-weight: 700;
   }
 
-  p {
+  .course-name {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--color-bordeaux);
+    margin-bottom: 0.25rem;
+  }
+
+  .course-desc {
     font-size: 0.95rem;
-    color: var(--color-slate-light);
+    color: var(--color-slate-dark);
     line-height: 1.6;
+    font-weight: 450;
   }
-}
 
-.prestation-note {
-  margin-top: 2rem;
-  background-color: var(--color-bordeaux-ultra-light);
-  padding: 1rem;
-  border-radius: var(--border-radius-md);
-  text-align: center;
-
-  .veg-badge {
+  .course-price-estimate {
+    font-family: var(--font-serif);
     font-size: 0.85rem;
     font-style: italic;
+    color: var(--color-slate-light);
+    margin-top: 0.25rem;
+    display: inline-block;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2px;
+  }
+}
+
+.parchment-separator {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+  letter-spacing: 5px;
+  opacity: 0.5;
+}
+
+/* Boîte des Formules en bas du parchemin */
+.parchment-formulas-box {
+  border-top: 1px dashed rgba(155, 88, 51, 0.25);
+  border-bottom: 1px dashed rgba(155, 88, 51, 0.25);
+  padding: 1.75rem 0;
+  margin-top: 1rem;
+
+  .formulas-box-header h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
     color: var(--color-bordeaux);
-    font-weight: 600;
+    margin-bottom: 1.25rem;
   }
 }
 
-.prestation-formulas-card {
-  background: white;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  padding: 2.5rem 2rem;
-  box-shadow: var(--shadow-soft);
-
-  .formulas-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--color-gold);
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-bottom: 1rem;
-
-    h2 {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      color: var(--color-slate-dark);
-    }
-
-    .sparkle-icon {
-      color: var(--color-gold);
-    }
-  }
+.formulas-horizontal-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
-.formulas-list {
+.parchment-formula-item {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(143, 150, 72, 0.04);
+  border: 1px solid rgba(143, 150, 72, 0.15);
+  border-radius: var(--border-radius-sm);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.formula-item {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: var(--color-bordeaux-ultra-light);
-  border: 1px solid transparent;
-  padding: 1.25rem;
-  border-radius: var(--border-radius-md);
-  transition: var(--transition-smooth);
-  gap: 1rem;
+  gap: 0.25rem;
+  min-width: 140px;
 
-  .formula-info {
-    flex-grow: 1;
-
-    h3 {
-      font-size: 0.95rem;
-      color: var(--color-slate-dark);
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-
-    p {
-      font-size: 0.8rem;
-      color: var(--color-slate-light);
-      line-height: 1.4;
-    }
+  h4 {
+    font-size: 0.85rem;
+    color: var(--color-slate-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
-  .formula-price-tag {
+  .pf-price {
     font-family: var(--font-serif);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: var(--color-bordeaux);
-    white-space: nowrap;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    color: var(--color-gold);
 
-    .price-unit {
+    .pf-unit {
       font-family: var(--font-sans);
       font-size: 0.7rem;
       color: var(--color-slate-light);
@@ -245,36 +230,41 @@
   &.featured {
     background-color: hsl(26, 93%, 97%);
     border-color: var(--color-gold-light);
-    transform: scale(1.02);
-    box-shadow: 0 4px 15px rgba(155, 88, 51, 0.08);
+    box-shadow: 0 4px 10px rgba(155, 88, 51, 0.05);
 
-    .formula-info h3 {
+    h4 {
       color: var(--color-gold-dark);
-    }
-
-    .formula-price-tag {
-      color: var(--color-gold);
+      font-weight: 700;
     }
   }
 }
 
-.cta-box {
-  background-color: var(--color-cream);
-  border: 1px solid var(--color-border);
-  padding: 1.5rem;
-  border-radius: var(--border-radius-md);
-  text-align: center;
+/* Pied du Parchemin */
+.parchment-footer {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.25rem;
 
-  p {
+  .veg-badge {
     font-size: 0.85rem;
+    font-style: italic;
+    color: var(--color-bordeaux);
+    font-weight: 600;
+  }
+
+  .terms-info {
+    font-size: 0.8rem;
     color: var(--color-slate-light);
-    line-height: 1.5;
+  }
+
+  .cta-box .btn {
+    padding: 0.85rem 2.5rem;
+    box-shadow: 0 4px 15px rgba(95, 101, 43, 0.15);
   }
 }
 
+/* Bannière d'info classique en bas */
 .prestation-info-banner {
   background: linear-gradient(135deg, hsl(65, 35%, 12%) 0%, hsl(21, 51%, 18%) 100%);
   color: white;
@@ -285,7 +275,7 @@
   gap: 3rem;
   align-items: center;
   box-shadow: var(--shadow-heavy);
-  border-bottom: 4px solid var(--color-gold);
+  border-bottom: 5px solid var(--color-gold);
 
   .info-content {
     display: flex;
@@ -296,7 +286,6 @@
       font-family: var(--font-serif);
       font-size: 1.8rem;
       line-height: 1.3;
-      color: white;
     }
 
     p {
@@ -310,7 +299,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 0.5rem;
 
     span {
       background-color: rgba(255, 255, 255, 0.08);
@@ -334,7 +322,6 @@
     border-radius: 50%;
     border: 3px solid var(--color-gold);
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     background-color: var(--color-bordeaux);
     display: flex;
     justify-content: center;
@@ -348,11 +335,18 @@
   }
 }
 
-/* Responsive styles */
-@media (max-width: 992px) {
-  .prestation-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+/* --- RESPONSIVE STYLE --- */
+@media (max-width: 768px) {
+  .parchment-inner-border {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .parchment-header h1 {
+    font-size: 2rem;
+  }
+
+  .parchment-course-section .course-name {
+    font-size: 1.5rem;
   }
 
   .prestation-info-banner {
@@ -363,33 +357,5 @@
     .info-illustration {
       order: -1;
     }
-  }
-
-  .prestation-hero {
-    h1 {
-      font-size: 2.2rem;
-    }
-
-    padding: 3rem 1.5rem;
-  }
-}
-
-@media (max-width: 640px) {
-
-  .prestation-details-card,
-  .prestation-formulas-card {
-    padding: 1.5rem;
-  }
-
-  .formula-item {
-    padding: 1rem;
-
-    &.featured {
-      transform: none;
-    }
-  }
-
-  .prestation-hero h1 {
-    font-size: 1.8rem;
   }
 }

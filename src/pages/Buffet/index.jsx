@@ -13,13 +13,14 @@ export default function Buffet() {
         </Link>
       </div>
 
+      {/* Hero Buffet - Grand Entête Arabesque */}
       <div className="prestation-hero">
         <div className="prestation-hero-content">
           <div className="prestation-badge">
             <ChefHat size={14} />
             <span>Déjeunatoires & Dînatoires</span>
           </div>
-          <h1>Buffets d'Exception</h1>
+          <h1>La Table du Riad</h1>
           <p className="prestation-tagline">
             L'alliance parfaite de la convivialité, d'une présentation soignée et des saveurs orientales pour vos événements.
           </p>
@@ -27,89 +28,83 @@ export default function Buffet() {
       </div>
 
       <div className="prestation-container">
-        <div className="prestation-grid">
-          {/* Buffet Details Card */}
-          <div className="prestation-details-card">
-            <div className="details-header">
-              <h2>Nos Formules de Buffet</h2>
-              <p>Une sélection de pièces froides et chaudes, présentées avec soin pour le plaisir des yeux et des papilles.</p>
+        {/* Grille à 3 Colonnes représentant la Table de Banquet */}
+        <div className="buffet-table-grid">
+
+          {/* Colonne 1: Formules (Plateau de Gauche) */}
+          <div className="table-column-card formulas-column">
+            <div className="column-header">
+              <Sparkles size={18} />
+              <h2>Nos Formules</h2>
             </div>
-
-            <div className="formulas-list" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div className="buffet-formula-item" style={{ padding: '1.25rem', backgroundColor: 'var(--color-bordeaux-ultra-light)', borderRadius: 'var(--border-radius-md)', border: '1px solid transparent' }}>
-                <div className="bf-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-slate-dark)' }}>Formule 7 pièces</h3>
-                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-bordeaux)', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
-                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
-                    <span>15,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
-                  </span>
-                </div>
-                <p className="bf-desc" style={{ fontSize: '0.85rem', color: 'var(--color-slate-light)', lineHeight: 1.5 }}>5 à 6 pièces salées et 1 à 2 pièces sucrées au choix.</p>
+            <div className="column-content formulas-list">
+              <div className="buffet-formula-item">
+                <h3>Formule 7 pièces</h3>
+                <p className="bf-desc">5 à 6 pièces salées et 1 à 2 pièces sucrées.</p>
+                <span className="bf-price">Dès 15€ <span className="bf-unit">/ pers.</span></span>
               </div>
 
-              <div className="buffet-formula-item" style={{ padding: '1.25rem', backgroundColor: 'var(--color-bordeaux-ultra-light)', borderRadius: 'var(--border-radius-md)', border: '1px solid transparent' }}>
-                <div className="bf-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-slate-dark)' }}>Formule 8 pièces</h3>
-                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-bordeaux)', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
-                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
-                    <span>17,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
-                  </span>
-                </div>
-                <p className="bf-desc" style={{ fontSize: '0.85rem', color: 'var(--color-slate-light)', lineHeight: 1.5 }}>6 à 7 pièces salées et 1 à 2 pièces sucrées au choix.</p>
+              <div className="buffet-formula-item">
+                <h3>Formule 8 pièces</h3>
+                <p className="bf-desc">6 à 7 pièces salées et 1 à 2 pièces sucrées.</p>
+                <span className="bf-price">Dès 17€ <span className="bf-unit">/ pers.</span></span>
               </div>
 
-              <div className="buffet-formula-item featured" style={{ padding: '1.25rem', backgroundColor: 'hsl(26, 93%, 97%)', borderRadius: 'var(--border-radius-md)', border: '1px solid var(--color-gold-light)', boxShadow: '0 4px 15px rgba(155, 88, 51, 0.08)' }}>
-                <div className="bf-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-gold-dark)' }}>Formule 9 pièces</h3>
-                  <span className="bf-price" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-gold)', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
-                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-gold)', fontWeight: 500 }}>À partir de</span>
-                    <span>19,00 € <span className="bf-unit" style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>/ pers.</span></span>
-                  </span>
-                </div>
-                <p className="bf-desc" style={{ fontSize: '0.85rem', color: 'var(--color-slate-light)', lineHeight: 1.5 }}>7 à 8 pièces salées et 1 à 2 pièces sucrées au choix.</p>
+              <div className="buffet-formula-item featured">
+                <h3>Formule 9 pièces</h3>
+                <p className="bf-desc">7 à 8 pièces salées et 1 à 2 pièces sucrées.</p>
+                <span className="bf-price">Dès 19€ <span className="bf-unit">/ pers.</span></span>
               </div>
-            </div>
-
-            <div className="prestation-note" style={{ marginTop: '2rem', backgroundColor: 'var(--color-bordeaux-ultra-light)', padding: '1rem', borderRadius: 'var(--border-radius-md)', textAlign: 'center' }}>
-              <span className="veg-badge" style={{ fontSize: '0.85rem', fontStyle: 'italic', color: 'var(--color-bordeaux)', fontWeight: 600 }}>Option végétarienne possible sur tout le menu</span>
             </div>
           </div>
 
-          {/* Example Pieces Card */}
-          <div className="prestation-formulas-card">
-            <div className="formulas-header">
-              <Sparkles size={20} className="sparkle-icon" />
-              <h2>Exemples de Pièces</h2>
+          {/* Colonne 2: Salés (Plateau Central) */}
+          <div className="table-column-card pieces-column">
+            <div className="column-header">
+              <Check size={18} />
+              <h2>Pièces Salées</h2>
             </div>
-
-            <div className="pieces-gallery">
-              <div className="piece-category">
-                <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: 'var(--color-gold-dark)', borderBottom: '1px solid var(--color-border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Pièces Salées</h4>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Mini-Bourek viande hachée ou fromage</li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Mini-Pastilla croustillante au poulet</li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Brochettes de Kefta marinées</li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Navettes garnies aux saveurs d'Orient</li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Mhadjeb traditionnels (crêpes farcies)</li>
-                </ul>
-              </div>
-
-              <div className="piece-category" style={{ marginTop: '1.5rem' }}>
-                <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: 'var(--color-gold-dark)', borderBottom: '1px solid var(--color-border)', paddingBottom: '0.25rem', marginBottom: '0.75rem' }}>Pièces Sucrées</h4>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Mini-Baklawa feuilletée au miel</li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Cornes de gazelle à la fleur d'oranger</li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Makrout moelleux aux dattes</li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-slate-light)' }}><Check size={14} className="check-icon" style={{ color: 'var(--color-success)', flexShrink: 0 }} /> Salade de fruits frais en verrines</li>
-                </ul>
-              </div>
+            <div className="column-content">
+              <ul className="pieces-list">
+                <li><Check size={14} className="check-icon" /> <span>Mini-Bourek viande hachée</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Mini-Pastilla au poulet</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Brochettes de Kefta marinées</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Navettes garnies d'Orient</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Mhadjeb traditionnels farcis</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Mini-boulettes Kefta grillées</span></li>
+              </ul>
             </div>
+          </div>
 
-            <div className="cta-box" style={{ marginTop: '1.5rem' }}>
-              <a href="#contact" className="btn btn-primary btn-block">
-                Demander un Devis Personnalisé
-              </a>
+          {/* Colonne 3: Sucrés (Plateau de Droite) */}
+          <div className="table-column-card sweets-column">
+            <div className="column-header">
+              <Check size={18} />
+              <h2>Pièces Sucrées</h2>
             </div>
+            <div className="column-content">
+              <ul className="pieces-list">
+                <li><Check size={14} className="check-icon" /> <span>Mini-Baklawa feuilletée</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Cornes de gazelle parfumées</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Makrout moelleux aux dattes</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Sablés d'Orient à la confiture</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Mignardises à la fleur d'oranger</span></li>
+                <li><Check size={14} className="check-icon" /> <span>Verrines de fruits frais</span></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Options & Devis */}
+        <div className="buffet-bottom-section">
+          <div className="prestation-note">
+            <span className="veg-badge">Option végétarienne possible sur l'ensemble de notre buffet</span>
+          </div>
+          <div className="cta-box">
+            <a href="#contact" className="btn btn-primary">
+              Demander un Devis Personnalisé
+            </a>
           </div>
         </div>
 
@@ -128,7 +123,7 @@ export default function Buffet() {
           </div>
           <div className="info-illustration">
             <div className="circle-image-wrapper">
-              <img src="/logo.svg" alt="Buffet Cœur d'Oran" className="circular-img" />
+              <img src="/logo192.png" alt="Buffet Cœur d'Oran" className="circular-img" />
             </div>
           </div>
         </div>

@@ -37,14 +37,14 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(23, 22, 22, 0.558);
   border: 1px solid var(--color-gold);
   padding: 0.4rem 1rem;
   border-radius: 50px;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--color-red);
+  color: orange;
   /* Orange accent color #F6931C */
   margin-bottom: 2rem;
 }
@@ -144,9 +144,9 @@
   overflow: hidden;
   backdrop-filter: blur(12px) saturate(120%);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
-              box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
-              border-color 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+    box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+    border-color 0.4s ease;
 
   @media (min-width: 1024px) and (max-width: 1279px) {
     padding: 1.75rem 1rem 1.5rem;
@@ -173,9 +173,9 @@
     transform: translateY(-8px);
     border-color: rgba(246, 147, 28, 0.4);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
-    box-shadow: 0 20px 40px rgba(246, 147, 28, 0.1), 
-                0 15px 30px rgba(0, 0, 0, 0.25), 
-                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(246, 147, 28, 0.1),
+      0 15px 30px rgba(0, 0, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
 
     &::before {
       transform: scale(3.5) translate(-10%, 10%);
@@ -200,7 +200,7 @@
 
     .feature-discover {
       color: var(--color-red);
-      
+
       .discover-arrow {
         transform: translateX(5px);
       }
@@ -226,11 +226,11 @@
   border: 1px solid rgba(246, 147, 28, 0.25);
   margin-bottom: 1.5rem;
   color: var(--color-red);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-              background 0.3s, 
-              border-color 0.3s, 
-              box-shadow 0.3s,
-              color 0.3s;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s,
+    color 0.3s;
 
   @media (min-width: 1024px) {
     margin-bottom: 1rem;

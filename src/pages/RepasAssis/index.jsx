@@ -13,111 +13,97 @@ export default function RepasAssis() {
         </Link>
       </div>
 
-      <div className="prestation-hero">
-        <div className="prestation-hero-content">
-          <div className="prestation-badge">
-            <Utensils size={14} />
-            <span>Service Traditionnel à Table</span>
+      {/* Le Parchemin Impérial centré */}
+      <div className="repas-assis-parchment-wrapper">
+        <div className="repas-assis-parchment">
+
+          {/* Bordure ornementée interne */}
+          <div className="parchment-inner-border">
+
+            {/* Logo et Entête */}
+            <header className="parchment-header">
+              <div className="palace-badge">
+                <Utensils size={16} />
+                <span>Banquet Impérial</span>
+              </div>
+              <h1>Repas Assis & Banquets</h1>
+              <p className="parchment-tagline">L'excellence de la gastronomie algérienne servie à table</p>
+              <div className="royal-separator">⚜ ۞ ⚜</div>
+            </header>
+
+            {/* Menu Séquentiel (Entrée -> Plat -> Dessert) */}
+            <div className="parchment-menu-sequence">
+
+              <div className="parchment-course-section">
+                <span className="course-title">Pour Commencer</span>
+                <h2 className="course-name">L'Entrée</h2>
+                <p className="course-desc">
+                  Pastilla croustillante aux amandes effilées, Bourek traditionnel doré au four, Harira parfumée à la coriandre fraîche ou Chorba Frik au blé concassé mijoté.
+                </p>
+                <span className="course-price-estimate">Dès 5,00 €</span>
+              </div>
+
+              <div className="parchment-separator">✦ ✧ ✦</div>
+
+              <div className="parchment-course-section">
+                <span className="course-title">Le Cœur du Festin</span>
+                <h2 className="course-name">Le Plat</h2>
+                <p className="course-desc">
+                  Couscous traditionnel généreux aux légumes du soleil et viandes fondantes, ou Tajine mijoté de agneau ou poulet aux pruneaux caramélisés et amandes grillées.
+                </p>
+                <span className="course-price-estimate">Dès 13,00 €</span>
+              </div>
+
+              <div className="parchment-separator">✦ ✧ ✦</div>
+
+              <div className="parchment-course-section">
+                <span className="course-title">La Note Douce</span>
+                <h2 className="course-name">Le Dessert</h2>
+                <p className="course-desc">
+                  Salade de fruits frais parfumée à la fleur d'oranger & menthe fraîche, ou Mahalabiya traditionnelle (crêpe/crème de riz veloutée à la cannelle).
+                </p>
+                <span className="course-price-estimate">Dès 4,00 €</span>
+              </div>
+
+            </div>
+
+            {/* Les Formules Officielles */}
+            <div className="parchment-formulas-box">
+              <div className="formulas-box-header">
+                <h3>Nos Formules de Réception</h3>
+              </div>
+              <div className="formulas-horizontal-row">
+                <div className="parchment-formula-item">
+                  <h4>Plat + Dessert</h4>
+                  <span className="pf-price">16€ <span className="pf-unit">/ pers.</span></span>
+                </div>
+                <div className="parchment-formula-item">
+                  <h4>Entrée + Plat</h4>
+                  <span className="pf-price">17€ <span className="pf-unit">/ pers.</span></span>
+                </div>
+                <div className="parchment-formula-item featured">
+                  <h4>Menu Complet</h4>
+                  <span className="pf-price">21€ <span className="pf-unit">/ pers.</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div className="parchment-footer">
+              <span className="veg-badge">Option végétarienne disponible sur demande pour chaque service</span>
+              <p className="terms-info">Tarifs adaptés selon le nombre d'invités et le lieu de votre réception.</p>
+              <div className="cta-box">
+                <a href="#contact" className="btn btn-primary">
+                  Demander un Devis Personnalisé
+                </a>
+              </div>
+            </div>
+
           </div>
-          <h1>Repas Assis & Banquets</h1>
-          <p className="prestation-tagline">
-            L'excellence d'un repas servi à l'assiette pour sublimer vos mariages, fêtes familiales ou repas professionnels.
-          </p>
         </div>
       </div>
 
+      {/* Info Banner en dessous du parchemin */}
       <div className="prestation-container">
-        <div className="prestation-grid">
-          {/* Menu Details Card */}
-          <div className="prestation-details-card">
-            <div className="details-header">
-              <h2>Notre Carte à la Carte</h2>
-              <p>Composez votre menu selon vos préférences. Nos produits sont préparés avec amour et épices d'Oran.</p>
-            </div>
-
-            <div className="menu-sections-wrapper">
-              <div className="menu-section-item">
-                <div className="item-title-row">
-                  <h3>Entrée</h3>
-                  <span className="item-price">À partir de 5,00 €</span>
-                </div>
-                <p className="item-choices">Pastilla croustillante aux amandes, Bourek traditionnel doré, Harira parfumée ou Chorba Frik au blé concassé.</p>
-              </div>
-
-              <div className="menu-section-item">
-                <div className="item-title-row">
-                  <h3>Plat</h3>
-                  <span className="item-price">À partir de 13,00 €</span>
-                </div>
-                <p className="item-choices">Couscous traditionnel généreux aux légumes et viandes fondantes, ou Tajine mijoté aux légumes de saison avec épices secrètes.</p>
-              </div>
-
-              <div className="menu-section-item">
-                <div className="item-title-row">
-                  <h3>Dessert</h3>
-                  <span className="item-price">À partir de 4,00 €</span>
-                </div>
-                <p className="item-choices">Salade de fruits frais de saison parfumée à la fleur d'oranger & menthe, ou Crème de riz traditionnelle (Mahalabiya) cannelle & fleur d'oranger.</p>
-              </div>
-            </div>
-
-            <div className="prestation-note">
-              <span className="veg-badge">Option végétarienne possible sur tout le menu</span>
-            </div>
-          </div>
-
-          {/* Formules Card */}
-          <div className="prestation-formulas-card">
-            <div className="formulas-header">
-              <Sparkles size={20} className="sparkle-icon" />
-              <h2>Nos Formules Servies</h2>
-            </div>
-
-            <div className="formulas-list">
-              <div className="formula-item">
-                <div className="formula-info">
-                  <h3>Formule Plat + Dessert</h3>
-                  <p>La simplicité gourmande d'un plat mijoté suivi d'une touche sucrée.</p>
-                </div>
-                <div className="formula-price-tag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
-                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
-                  <span>16€ <span className="price-unit">/ pers.</span></span>
-                </div>
-              </div>
-
-              <div className="formula-item">
-                <div className="formula-info">
-                  <h3>Formule Entrée + Plat</h3>
-                  <p>L'essentiel des saveurs salées traditionnelles algériennes.</p>
-                </div>
-                <div className="formula-price-tag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
-                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
-                  <span>17€ <span className="price-unit">/ pers.</span></span>
-                </div>
-              </div>
-
-              <div className="formula-item featured">
-                <div className="formula-info">
-                  <h3>Menu Complet</h3>
-                  <p>Entrée + Plat + Dessert pour un voyage gustatif absolu.</p>
-                </div>
-                <div className="formula-price-tag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.2 }}>
-                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', color: 'var(--color-slate-light)', fontWeight: 500 }}>À partir de</span>
-                  <span>21€ <span className="price-unit">/ pers.</span></span>
-                </div>
-              </div>
-            </div>
-
-            <div className="cta-box">
-              <p>Tarifs adaptés selon le nombre d'invités et le lieu de votre réception.</p>
-              <a href="#contact" className="btn btn-primary btn-block">
-                Demander un Devis Personnalisé
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Info Banner */}
         <div className="prestation-info-banner">
           <div className="info-content">
             <h3>Organisation de Noces & Grands Événements</h3>
@@ -132,11 +118,12 @@ export default function RepasAssis() {
           </div>
           <div className="info-illustration">
             <div className="circle-image-wrapper">
-              <img src="/logo.svg" alt="Cœur d'Oran" className="circular-img" />
+              <img src="/logo192.png" alt="Cœur d'Oran" className="circular-img" />
             </div>
           </div>
         </div>
       </div>
+
     </div>
   );
 }
