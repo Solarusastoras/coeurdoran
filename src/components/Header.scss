@@ -285,6 +285,17 @@
     .nav-link {
       width: 100%;
     }
+
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+      transform: translateY(10px);
+      min-width: 200px;
+    }
+
+    &.mobile-open .dropdown-menu {
+      transform: translateY(0) !important;
+    }
   }
 
   .nav-link {
