@@ -10,7 +10,7 @@ export default function Hero({ onExplore }) {
       <div className="hero-content-wrapper">
         <div className="hero-badge">
           <Star className="hero-badge-icon" size={14} />
-          <span>Traiteur Algérien de Prestige • Bordeaux</span>
+          <span>Traiteur Algérien de Prestige • Bordeaux / Nouvelle Aquitaine</span>
         </div>
 
         <h1 className="hero-title">
@@ -46,7 +46,7 @@ export default function Hero({ onExplore }) {
               <span className="feature-price">À partir de<br />16€ / pers.</span>
             </div>
           </Link>
- 
+
           <Link to="/buffet" className="feature-card">
             <div className="feature-icon-wrapper">
               <ChefHat className="feature-icon" size={24} />
@@ -60,7 +60,7 @@ export default function Hero({ onExplore }) {
               <span className="feature-price">À partir de<br />15€ / pers.</span>
             </div>
           </Link>
- 
+
           <Link to="/cocktail" className="feature-card">
             <div className="feature-icon-wrapper">
               <Wine className="feature-icon" size={24} />
@@ -74,7 +74,7 @@ export default function Hero({ onExplore }) {
               <span className="feature-price">À partir de<br />7€ / pers.</span>
             </div>
           </Link>
- 
+
           <Link to="/brunch" className="feature-card">
             <div className="feature-icon-wrapper">
               <Coffee className="feature-icon" size={24} />
@@ -88,7 +88,7 @@ export default function Hero({ onExplore }) {
               <span className="feature-price">Sur devis</span>
             </div>
           </Link>
- 
+
           <Link to="/ateliers" className="feature-card">
             <div className="feature-icon-wrapper">
               <Flame className="feature-icon" size={24} />

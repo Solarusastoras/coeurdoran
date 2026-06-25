@@ -29,8 +29,8 @@
 .logo-icon-wrapper {
   background-color: var(--color-bordeaux);
   color: var(--color-gold);
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
@@ -39,8 +39,8 @@
 }
 
 .header-logo-img {
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   border-radius: var(--border-radius-md);
   object-fit: cover;
   box-shadow: 0 4px 10px rgba(88, 24, 31, 0.25);
@@ -52,6 +52,7 @@
   font-size: 1.35rem;
   color: var(--color-bordeaux);
   line-height: 1.1;
+  margin-bottom: 0.2rem;
 }
 
 .logo-subtitle {
@@ -60,6 +61,9 @@
   letter-spacing: 1px;
   color: var(--color-gold-dark);
   font-weight: 600;
+  display: block;
+  line-height: 1.4;
+  max-width: 250px;
 }
 
 .header-nav {
