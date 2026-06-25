@@ -124,8 +124,6 @@ export default function Footer() {
           <p>&copy; {currentYear} Traiteur Cœur d’<span className="underlined-o">o</span>ran. Tous droits réservés. Bordeaux, France.</p>
           <div className="footer-legal">
             <a href="#mentions">Mentions Légales</a>
-            <span className="dot" aria-hidden="true">•</span>
-            <a href="#nas">Stockage local NAS actif</a>
           </div>
         </div>
       </div>
