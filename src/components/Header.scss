@@ -272,12 +272,24 @@
   }
 
   .header-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3rem 0.5rem;
     width: auto;
-    gap: 0.2rem;
+  }
+
+  .nav-dropdown-wrapper {
+    display: block;
+    width: 100%;
+    
+    .nav-link {
+      width: 100%;
+    }
   }
 
   .nav-link {
-    padding: 0.4rem 0.55rem;
+    padding: 0.4rem 0.5rem;
+    justify-content: center;
     
     svg {
       display: none;

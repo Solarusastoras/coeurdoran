@@ -27,7 +27,7 @@ export default function Brunch() {
               Des formules matinales douces, épicées et conviviales pour vos lendemains de fêtes ou réunions d'entreprise.
             </p>
             <div className="patio-illustration">
-              <img src="/logo.svg" alt="Brunch Cœur d'Oran" className="patio-logo-img" />
+              <img src="/logo192.png" alt="Brunch Cœur d'Oran" className="patio-logo-img" />
             </div>
           </div>
         </aside>

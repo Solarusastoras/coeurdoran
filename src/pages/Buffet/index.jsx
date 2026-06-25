@@ -20,7 +20,7 @@ export default function Buffet() {
             <ChefHat size={14} />
             <span>Déjeunatoires & Dînatoires</span>
           </div>
-          <h1>La Table du Riad</h1>
+          <h1>Buffets</h1>
           <p className="prestation-tagline">
             L'alliance parfaite de la convivialité, d'une présentation soignée et des saveurs orientales pour vos événements.
           </p>

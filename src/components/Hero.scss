@@ -237,7 +237,7 @@
   }
 
   .feature-icon {
-    color: var(--color-red);
+    color: orange;
     transition: color 0.3s ease;
   }
 }
@@ -301,9 +301,9 @@
 }
 
 .feature-price {
-  background: rgba(246, 147, 28, 0.1);
+  background: rgba(246, 148, 28, 0.031);
   border: 1px solid rgba(246, 147, 28, 0.25);
-  color: var(--color-red);
+  color: orange;
   font-size: 0.8rem;
   font-weight: 700;
   padding: 0.45rem 0.85rem;
