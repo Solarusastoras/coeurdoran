@@ -122,7 +122,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div className="footer-bottom-container">
-          <p>&copy; {currentYear} Traiteur Cœur d’<span className="underlined-o">O</span>ran. Tous droits réservés. Bordeaux, France.</p>
+          <p>&copy; {currentYear} Traiteur Cœur d’<span className="underlined-o">o</span>ran. Tous droits réservés. Bordeaux, France.</p>
           <div className="footer-legal">
             <Link to="/mentions-legales">Mentions Légales</Link>
           </div>
