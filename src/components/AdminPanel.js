@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Edit2, Trash2, Check, Lock, Unlock, Upload, AlertTriangle, Eye, Calendar } from 'lucide-react';
+import { Plus, Edit2, Trash2, Check, Lock, Unlock, Upload, AlertTriangle, Eye, Calendar, Loader2, LogOut } from 'lucide-react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { 
   createMenuItem, 
   updateMenuItem, 
@@ -14,11 +15,9 @@ import {
 } from '../utils/api';
 import './AdminPanel.scss';
 
-export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }) {
+export default function AdminPanel({ menuItems, onRefresh, isAdmin, isLoadingMenu }) {
   const navigate = useNavigate();
-  // Sécurité d'accès
-  const [pinCode, setPinCode] = useState('');
-  const [pinError, setPinError] = useState('');
+  const { loginWithRedirect, logout, user, isLoading } = useAuth0();
 
   // Gestion des onglets
   const [activeTab, setActiveTab] = useState('menu'); // 'menu' ou 'workshops'
@@ -77,16 +76,7 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
   const suggestedTags = ['Spécialité', 'Chef\'s Special', 'Local', 'Végétarien', 'Sans Gluten', 'Chaud', 'Froid', 'Poisson', 'Signature'];
   const suggestedAllergens = ['Gluten', 'Lactose', 'Œufs', 'Crustacés', 'Poisson', 'Fruits à coque', 'Sulfites', 'Soja'];
 
-  const handlePinSubmit = (e) => {
-    e.preventDefault();
-    if (pinCode === '1234') { // PIN de sécurité simple par défaut
-      setIsAdmin(true);
-      setPinError('');
-    } else {
-      setPinError('Code PIN incorrect. Veuillez réessayer.');
-      setPinCode('');
-    }
-  };
+
 
   const handleEditClick = (item) => {
     setEditingItem(item);
@@ -330,6 +320,17 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
   };
 
   // --- 1. Rendu Écran de Connexion (Verrouillé) ---
+  if (isLoading) {
+    return (
+      <section className="admin-lock-screen">
+        <div className="lock-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <Loader2 className="animate-spin" size={40} style={{ color: 'var(--color-bordeaux)' }} />
+          <p style={{ marginTop: '1rem' }}>Vérification de l'accès...</p>
+        </div>
+      </section>
+    );
+  }
+
   if (!isAdmin) {
     return (
       <section className="admin-lock-screen">
@@ -339,25 +340,14 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
           </div>
           <h2>Administration Protégée</h2>
           <p>
-            Veuillez saisir votre code d'accès administrateur pour gérer les menus stockés sur votre NAS.
+            L'accès à l'administration nécessite une authentification sécurisée via Auth0.
           </p>
-          <form onSubmit={handlePinSubmit} className="lock-form">
-            <input
-              type="password"
-              placeholder="Saisir le code PIN"
-              value={pinCode}
-              onChange={(e) => setPinCode(e.target.value)}
-              className="lock-input"
-              maxLength={6}
-              autoComplete="current-password"
-              autoFocus
-            />
-            {pinError && <p className="lock-error">{pinError}</p>}
-            <button type="submit" className="btn btn-primary btn-block">
+          <div className="lock-form" style={{ marginTop: '2rem' }}>
+            <button onClick={() => loginWithRedirect()} className="btn btn-primary btn-block">
               <Unlock size={16} />
-              Déverrouiller (PIN: 1234)
+              Se connecter avec Auth0
             </button>
-          </form>
+          </div>
         </div>
       </section>
     );
@@ -377,10 +367,18 @@ export default function AdminPanel({ menuItems, onRefresh, isAdmin, setIsAdmin }
               : "Interface de gestion des disponibilités des places pour vos ateliers de cuisine."}
           </p>
         </div>
-        <button className="btn btn-outline" onClick={() => { setIsAdmin(false); navigate('/'); }}>
-          <Lock size={16} />
-          Verrouiller la session
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {user && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--color-slate)', fontWeight: 500 }}>
+              {user.picture && <img src={user.picture} alt={user.name} style={{ width: 32, height: 32, borderRadius: '50%' }} />}
+              <span className="hide-on-mobile">{user.name || user.email}</span>
+            </div>
+          )}
+          <button className="btn btn-outline" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+            <LogOut size={16} />
+            Déconnexion
+          </button>
+        </div>
       </div>
 
       <div className="admin-tabs">

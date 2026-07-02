@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@auth0/auth0-react": "^2.19.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "jimp": "^1.6.1",

@@ -14,10 +14,12 @@ import Cocktail from './pages/Cocktail';
 import Brunch from './pages/Brunch';
 import { getMenu } from './utils/api';
 import { Loader2, AlertCircle } from 'lucide-react';
+import { useAuth0 } from '@auth0/auth0-react';
 import './App.scss';
 
 export default function App() {
-  const [isAdmin, setIsAdmin] = useState(false); // État d'authentification administrateur
+  const { isAuthenticated, isLoading: isAuthLoading } = useAuth0();
+  const isAdmin = isAuthenticated;
   const [menuItems, setMenuItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -145,7 +147,6 @@ export default function App() {
                 menuItems={menuItems}
                 onRefresh={fetchMenu}
                 isAdmin={isAdmin}
-                setIsAdmin={setIsAdmin}
                 isLoadingMenu={isLoading}
               />
             </div>
