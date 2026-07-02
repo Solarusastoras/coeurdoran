@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import './Footer.scss';
 
@@ -121,9 +122,9 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div className="footer-bottom-container">
-          <p>&copy; {currentYear} Traiteur Cœur d’<span className="underlined-o">o</span>ran. Tous droits réservés. Bordeaux, France.</p>
+          <p>&copy; {currentYear} Traiteur Cœur d’<span className="underlined-o">O</span>ran. Tous droits réservés. Bordeaux, France.</p>
           <div className="footer-legal">
-            <a href="#mentions">Mentions Légales</a>
+            <Link to="/mentions-legales">Mentions Légales</Link>
           </div>
         </div>
       </div>
