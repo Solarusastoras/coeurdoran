@@ -75,15 +75,15 @@ export default function RepasAssis() {
               <div className="formulas-horizontal-row">
                 <div className="parchment-formula-item">
                   <h4>Plat + Dessert</h4>
-                  <span className="pf-price">16€ <span className="pf-unit">/ pers.</span></span>
+                  <span className="pf-price">Dès 16€ <span className="pf-unit">/ pers.</span></span>
                 </div>
                 <div className="parchment-formula-item">
                   <h4>Entrée + Plat</h4>
-                  <span className="pf-price">17€ <span className="pf-unit">/ pers.</span></span>
+                  <span className="pf-price">Dès 17€ <span className="pf-unit">/ pers.</span></span>
                 </div>
                 <div className="parchment-formula-item featured">
                   <h4>Menu Complet</h4>
-                  <span className="pf-price">21€ <span className="pf-unit">/ pers.</span></span>
+                  <span className="pf-price">Dès 21€ <span className="pf-unit">/ pers.</span></span>
                 </div>
               </div>
             </div>

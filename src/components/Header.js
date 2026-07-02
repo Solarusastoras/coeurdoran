@@ -115,7 +115,7 @@ export default function Header({ isAdmin }) {
             aria-label={isAdmin ? 'Admin (Connecté)' : 'Espace Admin'}
             onClick={(e) => {
               if (!isAdmin) {
-                const confirmed = window.confirm("⚠️ Espace strictement réservé à l'administrateur du site.\n\nVoulez-vous vraiment continuer vers la page de connexion ?");
+                const confirmed = window.confirm("⚠️ Cette partie est réservée à l'administrateur.\n\nPas de souci, vous pouvez retourner au site en cliquant sur « Annuler ».\n\nMerci d'avance pour votre compréhension et bonne navigation.");
                 if (!confirmed) {
                   e.preventDefault();
                 }

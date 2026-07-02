@@ -316,12 +316,13 @@
   }
 
   .circle-image-wrapper {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    border: 3px solid var(--color-gold);
+    border: 5px solid var(--color-gold);
     overflow: hidden;
-    background-color: var(--color-bordeaux);
+    background-color: hsl(40, 30%, 97%); /* Fond parchemin/blanc cassé */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -329,7 +330,8 @@
     .circular-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      transform: scale(1.1); /* Zoom très léger pour bien remplir */
     }
   }
 }
