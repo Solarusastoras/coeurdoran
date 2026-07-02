@@ -12,6 +12,7 @@ import RepasAssis from './pages/RepasAssis';
 import Buffet from './pages/Buffet';
 import Cocktail from './pages/Cocktail';
 import Brunch from './pages/Brunch';
+import MentionsLegales from './pages/MentionsLegales';
 import { getMenu } from './utils/api';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -122,6 +123,12 @@ export default function App() {
 
           <Route path="/histoire" element={
             <NotreHistoire />
+          } />
+
+          <Route path="/mentions-legales" element={
+            <div className="container">
+              <MentionsLegales />
+            </div>
           } />
 
           <Route path="/booklet" element={
