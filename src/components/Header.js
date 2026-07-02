@@ -113,9 +113,17 @@ export default function Header({ isAdmin }) {
             to="/admin"
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             aria-label={isAdmin ? 'Admin (Connecté)' : 'Espace Admin'}
+            onClick={(e) => {
+              if (!isAdmin) {
+                const confirmed = window.confirm("⚠️ Espace strictement réservé à l'administrateur du site.\n\nVoulez-vous vraiment continuer vers la page de connexion ?");
+                if (!confirmed) {
+                  e.preventDefault();
+                }
+              }
+            }}
           >
-            <Settings2 size={18} />
-            <span className="nav-text" data-short="Admin">{isAdmin ? 'Admin (Connecté)' : 'Espace Admin'}</span>
+            {isAdmin ? <Settings2 size={18} /> : <span style={{ fontSize: '20px' }} role="img" aria-label="Espace Admin">👩‍🍳</span>}
+            <span className="nav-text" data-short="Admin">{isAdmin ? 'Admin' : ''}</span>
           </NavLink>
         </nav>
       </div>
